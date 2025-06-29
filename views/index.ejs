@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Moves</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        /* ...existing styles... */
+        /* Add spinner for loading states */
+        .spinner {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4a90e2;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg);}
+            100% { transform: rotate(360deg);}
+        }
+        .hidden { display: none; }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Colorful Moves</h1>
+        <nav>
+            <ul>
+                <li><a href="#find-contracts">Find Contracts</a></li>
+                <li><a href="#submit-proposal">Submit Proposal</a></li>
+                <li><a href="#local-subcontractors">Local Subcontractors</a></li>
+                <li><a href="#vendor-portal">Vendor Portal</a></li>
+                <li><a href="#admin-portal">Admin Portal</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="find-contracts"></section>
+            <h2>Find Contracts</h2>
+            <input type="text" id="contract-search" placeholder="Search for contracts...">
+            <button id="search-contracts">Search</button>
+            <span id="contract-spinner" class="spinner hidden"></span>
+            <div id="contract-results"></div>
+        </section>
+
+        <section id="submit-proposal">
+            <h2>Submit Proposal</h2>
+            <form id="proposal-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="proposal" placeholder="Your Proposal" required></textarea>
+                <button type="submit">Send Proposal</button>
+                <span id="proposal-spinner" class="spinner hidden"></span>
+            </form>
+            <div id="proposal-status"></div>
+        </section>
+
+        <section id="local-subcontractors"></section>
+            <h2>Local Subcontractors</h2>
+            <button id="refresh-subcontractors">Refresh List</button>
+            <span id="subcontractor-spinner" class="spinner hidden"></span>
+            <div id="subcontractor-list"></div>
+        </section>
+
+        <section id="vendor-portal">
+            <h2>Vendor Portal</h2>
+            <p>Access vendor documentation and performance tracking.</p>
+            <a href="vendor-portal.html">Go to Vendor Portal</a>
+        </section>
+
+        <section id="admin-portal">
+            <h2>Admin Portal</h2>
+            <p>Access admin documentation and performance tracking.</p>
+            <a href="admin-portal.html">Go to Admin Portal</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Colorful Moves. All rights reserved.</p>
+    </footer>
+
+    <!-- Chat AI Assistant -->
+    <div id="chat-assistant-container">
+        <button id="chat-toggle">Chat AI</button>
+        <div id="chat-assistant" style="display:none;"></div>
+            <div id="chat-messages"></div>
+            <form id="chat-form" autocomplete="off">
+                <input type="text" id="chat-input" placeholder="Ask me anything..." required />
+                <button type="submit" id="chat-send">Send</button>
+                <span id="chat-spinner" class="spinner hidden"></span>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Toggle chat assistant visibility
+        $('#chat-toggle').on('click', function() {
+            $('#chat-assistant').toggle();
+        });
+
+        // Dynamic contract search (simulate AJAX)
+        $('#search-contracts').on('click', function() {
+            const query = $('#contract-search').val().trim();
+            $('#contract-results').empty();
+            $('#contract-spinner').removeClass('hidden');
+            setTimeout(function() {
+                $('#contract-spinner').addClass('hidden');
+                if (!query) {
+                    $('#contract-results').html('<em>Please enter a search term.</em>');
+                } else {
+                    // Simulated results
+                    $('#contract-results').html(
+                        `<ul>
+                            <li><strong>Painting Contract A</strong> - Downtown - <button class="apply-btn">Apply</button></li>
+                            <li><strong>Renovation Contract B</strong> - Uptown - <button class="apply-btn">Apply</button></li>
+                        </ul>`
+                    );
+                }
+            }, 900);
+        });
+
+        // Apply button for contracts (dynamic event)
+        $(document).on('click', '.apply-btn', function() {
+            $(this).prop('disabled', true).text('Applied!');
+        });
+
+        // Proposal form AJAX simulation
+        $('#proposal-form').on('submit', function(e) {
+            e.preventDefault();
+            $('#proposal-status').empty();
+            $('#proposal-spinner').removeClass('hidden');
+            setTimeout(function() {
+                $('#proposal-spinner').addClass('hidden');
+                $('#proposal-status').html('<span style="color:green;">Proposal submitted successfully!</span>');
+                $('#proposal-form')[0].reset();
+            }, 1200);
+        });
+
+        // Dynamic subcontractor list (simulate AJAX)
+        function loadSubcontractors() {
+            $('#subcontractor-list').empty();
+            $('#subcontractor-spinner').removeClass('hidden');
+            setTimeout(function() {
+                $('#subcontractor-spinner').addClass('hidden');
+                $('#subcontractor-list').html(
+                    `<ul>
+                        <li>Jane Doe - Electrician <button class="contact-btn">Contact</button></li>
+                        <li>John Smith - Plumber <button class="contact-btn">Contact</button></li>
+                    </ul>`
+                );
+            }, 800);
+        }
+        $('#refresh-subcontractors').on('click', loadSubcontractors);
+        // Load on page ready
+        $(loadSubcontractors);
+
+        // Contact button for subcontractors
+        $(document).on('click', '.contact-btn', function() {
+            $(this).prop('disabled', true).text('Contacted!');
+        });
+
+        // Chat AI Assistant with loading spinner
+        $('#chat-form').on('submit', function(e) {
+            e.preventDefault();
+            const userMsg = $('#chat-input').val().trim();
+            if (!userMsg) return;
+            $('#chat-messages').append('<div class="chat-message user">You: ' + $('<div>').text(userMsg).html() + '</div>');
+            $('#chat-input').val('');
+            $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
+            $('#chat-spinner').removeClass('hidden');
+
+            setTimeout(function() {
+                let aiResponse = "I'm your AI assistant. How can I help you?";
+                if (/contract|proposal|subcontractor|vendor|admin/i.test(userMsg)) {
+                    aiResponse = "Let me help you with information about " + userMsg + ".";
+                }
+                $('#chat-messages').append('<div class="chat-message ai">AI: ' + $('<div>').text(aiResponse).html() + '</div>');
+                $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
+                $('#chat-spinner').addClass('hidden');
+            }, 700);
+        });
+    </script>
+</body>
+</html>
