@@ -4,45 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Colorful Moves</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <!-- Use Bootstrap dark theme -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
     <style>
-        .spinner {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #4a90e2;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-left: 10px;
-            vertical-align: middle;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg);}
-            100% { transform: rotate(360deg);}
-        }
-        .hidden { display: none; }
         body {
-            padding-bottom: 120px;
+            background: #181a1b;
+            color: #f8f9fa;
+            min-height: 100vh;
+        }
+        .navbar, .fixed-footer {
+            background: #212529 !important;
+        }
+        .navbar-brand, .nav-link, .dropdown-item, .navbar-toggler-icon {
+            color: #f8f9fa !important;
+        }
+        .nav-link.active, .nav-link:focus, .nav-link:hover {
+            color: #4a90e2 !important;
+        }
+        .dropdown-menu {
+            background: #23272b;
+        }
+        .dropdown-item:hover, .dropdown-item:focus {
+            background: #343a40;
+            color: #4a90e2;
+        }
+        .center-section {
+            text-align: center;
+        }
+        .card {
+            background: #23272b;
+            color: #f8f9fa;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+        }
+        .form-control, .form-control:focus {
+            background: #23272b;
+            color: #f8f9fa;
+            border: 1px solid #343a40;
+        }
+        .btn-primary, .btn-success, .btn-outline-primary, .btn-outline-secondary {
+            border-radius: 6px;
+        }
+        .btn-primary, .btn-success {
+            background: #4a90e2;
+            border-color: #4a90e2;
+        }
+        .btn-primary:hover, .btn-success:hover {
+            background: #357ab7;
+            border-color: #357ab7;
+        }
+        .btn-outline-primary, .btn-outline-secondary {
+            color: #4a90e2;
+            border-color: #4a90e2;
+            background: transparent;
+        }
+        .btn-outline-primary:hover, .btn-outline-secondary:hover {
+            background: #4a90e2;
+            color: #fff;
+        }
+        .nav-tabs .nav-link.active {
+            background: #23272b;
+            color: #4a90e2 !important;
+            border-color: #4a90e2 #23272b #23272b;
+        }
+        .nav-tabs .nav-link {
+            color: #f8f9fa;
+        }
+        .tab-content {
+            background: #23272b;
+            color: #f8f9fa;
         }
         .fixed-footer {
             position: fixed;
             left: 0;
             bottom: 0;
             width: 100%;
-            background: #343a40;
-            color: #fff;
             z-index: 1030;
-            box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
         }
         #chat-assistant-container {
             max-width: 400px;
             margin: 0 auto;
         }
         #chat-assistant {
-            background: #222;
-            color: #fff;
+            background: #23272b;
+            color: #f8f9fa;
             border-radius: 8px;
             padding: 10px;
             margin-top: 10px;
@@ -56,18 +104,22 @@
         }
         .chat-message.user { color: #4a90e2; }
         .chat-message.ai { color: #fff; }
-        /* Center all links and sections */
-        .center-links {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
+        .spinner {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid #343a40;
+            border-top: 3px solid #4a90e2;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+            vertical-align: middle;
         }
-        .center-section {
-            text-align: center;
+        @keyframes spin {
+            0% { transform: rotate(0deg);}
+            100% { transform: rotate(360deg);}
         }
-        /* Highlight active section */
+        .hidden { display: none; }
         .section-highlight {
             animation: highlight 1s;
             box-shadow: 0 0 10px 2px #4a90e2;
@@ -81,11 +133,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <!-- Centered Navbar Links -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4"></nav>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark mb-4">
         <div class="container-fluid">
             <a class="navbar-brand mx-auto" href="#">Colorful Moves</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"></button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
@@ -139,7 +191,7 @@
             <div id="subcontractor-list"></div>
         </section>
 
-        <!-- Centered Portals Tabbed Section -->
+        <!-- Portals Tabbed Section -->
         <section id="portals-tabs" class="mb-5 center-section">
             <ul class="nav nav-tabs justify-content-center" id="portalTab" role="tablist" style="margin:auto;">
                 <li class="nav-item" role="presentation">
