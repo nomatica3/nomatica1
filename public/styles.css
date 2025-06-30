@@ -1,3 +1,5 @@
+app.use(express.static(path.join(__dirname, 'public')));
+
 /* Colorful Moves Animation Styles with More Dynamic Features */
 
 @keyframes colorful-move {
@@ -52,6 +54,8 @@
     animation-play-state: paused;
 }
 
+
+/* Dropdown Menu Styles */
 .dropdown-menu {
   max-height: 60vh;
   overflow-y: auto;

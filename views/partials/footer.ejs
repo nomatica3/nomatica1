@@ -1,5 +1,56 @@
 <footer class="fixed-footer">
   <div class="footer-content position-relative">
-    <span>&copy; 2025 Colorful Moves. All rights reserved.</span>
+    <span class="footer-copyright">
+      &copy; 2025 Colorful Moves. All rights reserved.
+    </span>
+    <div id="chat-footer-assistant">
+      <button id="chat-toggle" class="btn btn-outline-primary btn-sm">Chat AI</button>
+      <div id="chat-assistant">
+        <div id="chat-messages" class="mb-2"></div>
+        <form id="chat-form" autocomplete="off" class="d-flex">
+          <input type="text" id="chat-input" class="form-control me-2" placeholder="Ask me anything..." required />
+          <button type="submit" id="chat-send" class="btn btn-primary">Send</button>
+          <span id="chat-spinner" class="spinner hidden"></span>
+        </form>
+      </div>
+    </div>
   </div>
 </footer>
+
+<script>
+// Toggle chat assistant visibility
+$('#chat-toggle').on('click', function() {
+  $('#chat-assistant').toggle();
+});
+
+// Chat AI Assistant with loading spinner
+$('#chat-form').on('submit', function(e) {
+  e.preventDefault();
+  const userMsg = $('#chat-input').val().trim();
+  if (!userMsg) return;
+  $('#chat-messages').append('<div class="chat-message user">You: ' + $('<div>').text(userMsg).html() + '</div>');
+  $('#chat-input').val('');
+  $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
+  $('#chat-spinner').removeClass('hidden');
+
+  setTimeout(function() {
+    let aiResponse = "I'm your AI assistant. How can I help you?";
+    if (/contract|proposal|subcontractor|vendor|admin/i.test(userMsg)) {
+      aiResponse = "Let me help you with information about " + userMsg + ".";
+    }
+    $('#chat-messages').append('<div class="chat-message ai">AI: ' + $('<div>').text(aiResponse).html() + '</div>');
+    $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
+    $('#chat-spinner').addClass('hidden');
+  }, 700);
+});
+
+// Hide chat on click outside
+$(document).on('mousedown touchstart', function(e) {
+  if (
+    $('#chat-assistant').is(':visible') &&
+    !$(e.target).closest('#chat-assistant, #chat-toggle').length
+  ) {
+    $('#chat-assistant').hide();
+  }
+});
+</script>
