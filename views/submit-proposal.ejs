@@ -1,29 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <% include('partials/head') %>
     <title>Submit Proposal</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <div class="container">
+    <% include('partials/navbar') %>
+    <div class="container py-4">
         <h1>Submit a Proposal</h1>
         <form action="/submit-proposals" method="POST">
-            <div class="form-group">
+            <div class="mb-3">
                 <label for="title">Proposal Title</label>
-                <input type="text" id="title" name="title" required>
+                <input type="text" id="title" name="title" class="form-control" required>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label for="description">Description</label>
-                <textarea id="description" name="description" rows="5" required></textarea>
+                <textarea id="description" name="description" rows="5" class="form-control" required></textarea>
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label for="author">Your Name</label>
-                <input type="text" id="author" name="author" required>
+                <input type="text" id="author" name="author" class="form-control" required minlength="2" maxlength="50">
             </div>
-            <button type="submit">Submit Proposal</button>
+            <div class="mb-3">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Proposal</button>
         </form>
+        <% if (typeof success !== 'undefined') { %>
+            <div class="alert alert-success mt-3"><%= success %></div>
+        <% } %>
+        <% if (typeof error !== 'undefined') { %>
+            <div class="alert alert-danger mt-3"><%= error %></div>
+        <% } %>
     </div>
+    <% include('partials/footer') %>
 </body>
 </html>
