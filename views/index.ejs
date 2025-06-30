@@ -1,7 +1,13 @@
 <body style="background:#f6f8fa;">
-    <div class="d-flex" style="min-height:100vh;">
+    <!-- Bootstrap Header -->
+    <header class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm" style="height:64px;">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">Nomatica</a>
+        </div>
+    </header>
+    <div class="d-flex" style="min-height:calc(100vh - 64px);">
         <!-- Sidebar -->
-        <nav class="bg-white border-end shadow-sm" style="width:260px;min-height:100vh;position:fixed;left:0;top:0;z-index:1040;">
+        <nav class="bg-white border-end shadow-sm" style="width:260px;min-height:100vh;position:fixed;left:0;top:64px;z-index:1040;">
             <div class="p-3">
                 <div class="mb-4">
                     <span class="fw-bold fs-5">Menu</span>
@@ -41,11 +47,18 @@
             </div>
         </nav>
         <!-- Main Content -->
-        <main class="flex-grow-1 d-flex align-items-center justify-content-center" style="margin-left:260px;"></main>
-            <div class="text-center">
+        <main class="flex-grow-1 d-flex align-items-center justify-content-center" style="margin-left:260px;min-height:calc(100vh - 64px);">
+            <div class="text-center w-100">
                 <h1 class="display-4 fw-bold mb-4" style="letter-spacing:1px;">Colorful Moves</h1>
                 <!-- Center area intentionally left clear -->
             </div>
         </main>
     </div>
+    <!-- Footer with AI Assistant -->
+    <footer class="bg-white border-top shadow-sm py-3" style="position:fixed;bottom:0;left:260px;right:0;z-index:1050;">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <span class="text-muted small">© 2024 Nomatica</span>
+            <span class="fw-bold text-primary">AI Assistant</span>
+        </div>
+    </footer>
 </body>
