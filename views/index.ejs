@@ -1,50 +1,51 @@
-<body>
-    <!-- Centered Navbar Links -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
-        <div class="container-fluid">
-            <a class="navbar-brand mx-auto" href="#">Colorful Moves</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
-                <!-- (You can keep or remove these nav links as needed) -->
-            </div>
-        </div>
-    </nav>
-
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar py-4">
-                <div class="position-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item mb-2">
-                            <a class="nav-link" href="/find-contracts">Find Contracts</a>
-                        </li>
-                        <li class="nav-item mb-2">
-                            <a class="nav-link" href="/submit-proposal">Submit Proposal</a>
-                        </li>
-                        <li class="nav-item mb-2">
-                            <a class="nav-link" href="/local-subcontractors">Local Subcontractors</a>
-                        </li>
-                        <li class="nav-item mb-2">
-                            <a class="nav-link" href="/vendor-portal">Vendor Portal</a>
-                        </li>
-                        <li class="nav-item mb-2">
-                            <a class="nav-link" href="/admin-portal">Admin Portal</a>
-                        </li>
-                    </ul>
+<body style="background:#f6f8fa;">
+    <div class="d-flex" style="min-height:100vh;">
+        <!-- Sidebar -->
+        <nav class="bg-white border-end shadow-sm" style="width:260px;min-height:100vh;position:fixed;left:0;top:0;z-index:1040;">
+            <div class="p-3">
+                <div class="mb-4">
+                    <span class="fw-bold fs-5">Menu</span>
                 </div>
-            </nav>
-
-            <!-- Main content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mb-5">
-                <!-- Place your sections here as before -->
-                <!-- ... (copy your <section> blocks here) ... -->
-            </main>
-        </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control form-control-sm" placeholder="Search" style="font-size:0.95rem;">
+                    <small class="text-muted ms-1">COMMAND+K</small>
+                </div>
+                <button class="btn btn-primary w-100 mb-3">New</button>
+                <button class="btn btn-outline-secondary w-100 mb-4">Upgrade</button>
+                <ul class="nav flex-column mb-4">
+                    <li class="nav-item mb-2"><span class="fw-bold text-uppercase small text-muted">N</span></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#"><span class="me-2">&#128200;</span>Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#"><span class="me-2">&#128187;</span>nomatica1</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#"><span class="me-2">&#128197;</span>Events</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#"><span class="me-2">&#9881;&#65039;</span>Settings</a></li>
+                </ul>
+                <div class="mb-2 fw-bold text-uppercase small text-muted">Monitor</div>
+                <ul class="nav flex-column mb-4">
+                    <li class="nav-item"><a class="nav-link text-dark" href="#">Logs</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#">Metrics</a></li>
+                </ul>
+                <div class="mb-2 fw-bold text-uppercase small text-muted">Manage</div>
+                <ul class="nav flex-column mb-4">
+                    <li class="nav-item"><a class="nav-link text-dark" href="#">Environment</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#">Shell</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#">Scaling</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#">Previews</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#">Disks</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#">Jobs</a></li>
+                </ul>
+                <div class="mb-2 fw-bold text-uppercase small text-muted">Other</div>
+                <ul class="nav flex-column mb-4">
+                    <li class="nav-item"><a class="nav-link text-dark" href="#">Changelog</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#">Invite a friend</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Main Content -->
+        <main class="flex-grow-1 d-flex align-items-center justify-content-center" style="margin-left:260px;"></main>
+            <div class="text-center">
+                <h1 class="display-4 fw-bold mb-4" style="letter-spacing:1px;">Colorful Moves</h1>
+                <!-- Center area intentionally left clear -->
+            </div>
+        </main>
     </div>
-
-    <!-- Fixed Footer with Chat AI Assistant -->
-    <!-- (Keep your footer as is) -->
 </body>
