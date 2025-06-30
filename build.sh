@@ -4,4 +4,4 @@ export PATH="/opt/render/project/poetry/bin:$PATH"
 # Confirm Poetry version
 poetry --version
 # Install dependencies
-poetry install
+poetry install --no-root
