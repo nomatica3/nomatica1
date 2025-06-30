@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Install Poetry
-curl -sSL https://install.python-poetry.org | python3 -
-# Add poetry to PATH
-export PATH="$HOME/.local/bin:$PATH"
+# Add Poetry to PATH
+export PATH="/opt/render/project/poetry/bin:$PATH"
+# Confirm Poetry version
+poetry --version
 # Install dependencies
 poetry install
