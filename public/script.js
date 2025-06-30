@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Hover to pulse
     mover.addEventListener('mouseenter', () => {
         mover.style.transition = 'all 0.3s cubic-bezier(.68,-0.55,.27,1.55)';
-        mover.style.transform += ' scale(1.2)';
+        mover.style.transform = mover.style.transform.replace(/scale\([^)]+\)/, 'scale(1.2)');
     });
     mover.addEventListener('mouseleave', () => {
         mover.style.transition = 'all 0.7s cubic-bezier(.68,-0.55,.27,1.55)';
@@ -49,6 +49,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Move on interval
-    setInterval(moveAndColor, 1000);
+    let intervalId = setInterval(moveAndColor, 1000);
     moveAndColor();
+
+    // Pause movement on hover, resume on leave
+    mover.addEventListener('mouseenter', () => {
+        clearInterval(intervalId);
+    });
+    mover.addEventListener('mouseleave', () => {
+        intervalId = setInterval(moveAndColor, 1000);
+    });
+
+    // Responsive: move if window resizes
+    window.addEventListener('resize', moveAndColor);
 });
