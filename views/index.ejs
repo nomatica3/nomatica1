@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en"></html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Colorful Moves</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/styles.css">
     <style>
-        /* ...existing styles... */
-        /* Add spinner for loading states */
         .spinner {
             display: inline-block;
             width: 24px;
@@ -24,80 +23,144 @@
             100% { transform: rotate(360deg);}
         }
         .hidden { display: none; }
+        body {
+            padding-bottom: 120px; /* Space for fixed footer */
+        }
+        .fixed-footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background: #343a40;
+            color: #fff;
+            z-index: 1030;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+        }
+        #chat-assistant-container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        #chat-assistant {
+            background: #222;
+            color: #fff;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        #chat-messages {
+            max-height: 100px;
+            overflow-y: auto;
+            margin-bottom: 8px;
+        }
+        .chat-message.user { color: #4a90e2; }
+        .chat-message.ai { color: #fff; }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Welcome to Colorful Moves</h1>
-        <nav>
-            <ul>
-                <li><a href="#find-contracts">Find Contracts</a></li>
-                <li><a href="#submit-proposal">Submit Proposal</a></li>
-                <li><a href="#local-subcontractors">Local Subcontractors</a></li>
-                <li><a href="#vendor-portal">Vendor Portal</a></li>
-                <li><a href="#admin-portal">Admin Portal</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Dynamic Bootstrap Navbar Header with Dropdown -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Colorful Moves</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#find-contracts">Find Contracts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#submit-proposal">Submit Proposal</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#local-subcontractors">Local Subcontractors</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Portals
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink"></ul>
+                            <li><a class="dropdown-item portal-tab-link" href="#" data-tab="vendor">Vendor Portal</a></li>
+                            <li><a class="dropdown-item portal-tab-link" href="#" data-tab="admin">Admin Portal</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <main>
-        <section id="find-contracts"></section>
+    <main class="container mb-5">
+        <section id="find-contracts" class="mb-5">
             <h2>Find Contracts</h2>
-            <input type="text" id="contract-search" placeholder="Search for contracts...">
-            <button id="search-contracts">Search</button>
-            <span id="contract-spinner" class="spinner hidden"></span>
+            <div class="input-group mb-2"></div>
+                <input type="text" id="contract-search" class="form-control" placeholder="Search for contracts...">
+                <button id="search-contracts" class="btn btn-outline-primary">Search</button>
+                <span id="contract-spinner" class="spinner hidden"></span>
+            </div>
             <div id="contract-results"></div>
         </section>
 
-        <section id="submit-proposal">
+        <section id="submit-proposal" class="mb-5">
             <h2>Submit Proposal</h2>
-            <form id="proposal-form">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
-                <textarea name="proposal" placeholder="Your Proposal" required></textarea>
-                <button type="submit">Send Proposal</button>
+            <form id="proposal-form" class="mb-2">
+                <div class="mb-2">
+                    <input type="text" name="name" class="form-control mb-2" placeholder="Your Name" required>
+                    <input type="email" name="email" class="form-control mb-2" placeholder="Your Email" required>
+                    <textarea name="proposal" class="form-control mb-2" placeholder="Your Proposal" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Send Proposal</button>
                 <span id="proposal-spinner" class="spinner hidden"></span>
             </form>
             <div id="proposal-status"></div>
         </section>
 
-        <section id="local-subcontractors"></section>
+        <section id="local-subcontractors" class="mb-5">
             <h2>Local Subcontractors</h2>
-            <button id="refresh-subcontractors">Refresh List</button>
+            <button id="refresh-subcontractors" class="btn btn-outline-secondary mb-2">Refresh List</button>
             <span id="subcontractor-spinner" class="spinner hidden"></span>
             <div id="subcontractor-list"></div>
         </section>
 
-        <section id="vendor-portal">
-            <h2>Vendor Portal</h2>
-            <p>Access vendor documentation and performance tracking.</p>
-            <a href="vendor-portal.html">Go to Vendor Portal</a>
-        </section>
-
-        <section id="admin-portal">
-            <h2>Admin Portal</h2>
-            <p>Access admin documentation and performance tracking.</p>
-            <a href="admin-portal.html">Go to Admin Portal</a>
+        <!-- Portals Tabbed Section -->
+        <section id="portals-tabs" class="mb-5">
+            <ul class="nav nav-tabs" id="portalTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="vendor-tab" data-bs-toggle="tab" data-bs-target="#vendor-portal" type="button" role="tab" aria-controls="vendor-portal" aria-selected="true">Vendor Portal</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="admin-tab" data-bs-toggle="tab" data-bs-target="#admin-portal" type="button" role="tab" aria-controls="admin-portal" aria-selected="false">Admin Portal</button>
+                </li>
+            </ul>
+            <div class="tab-content border border-top-0 p-3" id="portalTabContent">
+                <div class="tab-pane fade show active" id="vendor-portal" role="tabpanel" aria-labelledby="vendor-tab">
+                    <h2>Vendor Portal</h2>
+                    <p>Access vendor documentation and performance tracking.</p>
+                    <a href="vendor-portal.html" class="btn btn-primary">Go to Vendor Portal</a>
+                </div>
+                <div class="tab-pane fade" id="admin-portal" role="tabpanel" aria-labelledby="admin-tab">
+                    <h2>Admin Portal</h2>
+                    <p>Access admin documentation and performance tracking.</p>
+                    <a href="admin-portal.html" class="btn btn-primary">Go to Admin Portal</a>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2023 Colorful Moves. All rights reserved.</p>
-    </footer>
-
-    <!-- Chat AI Assistant -->
-    <div id="chat-assistant-container">
-        <button id="chat-toggle">Chat AI</button>
-        <div id="chat-assistant" style="display:none;"></div>
-            <div id="chat-messages"></div>
-            <form id="chat-form" autocomplete="off">
-                <input type="text" id="chat-input" placeholder="Ask me anything..." required />
-                <button type="submit" id="chat-send">Send</button>
-                <span id="chat-spinner" class="spinner hidden"></span>
-            </form>
+    <!-- Fixed Footer with Chat AI Assistant -->
+    <footer class="fixed-footer py-3">
+        <div class="container" id="chat-assistant-container">
+            <div class="d-flex justify-content-between align-items-center">
+                <span>&copy; 2023 Colorful Moves. All rights reserved.</span>
+                <button id="chat-toggle" class="btn btn-light btn-sm ms-2">Chat AI</button>
+            </div>
+            <div id="chat-assistant" style="display:none;">
+                <div id="chat-messages" class="mb-2"></div>
+                <form id="chat-form" autocomplete="off" class="d-flex">
+                    <input type="text" id="chat-input" class="form-control me-2" placeholder="Ask me anything..." required />
+                    <button type="submit" id="chat-send" class="btn btn-success">Send</button>
+                    <span id="chat-spinner" class="spinner hidden"></span>
+                </form>
+            </div>
         </div>
-    </div>
+    </footer>
 
     <script>
         // Toggle chat assistant visibility
@@ -115,11 +178,16 @@
                 if (!query) {
                     $('#contract-results').html('<em>Please enter a search term.</em>');
                 } else {
-                    // Simulated results
                     $('#contract-results').html(
-                        `<ul>
-                            <li><strong>Painting Contract A</strong> - Downtown - <button class="apply-btn">Apply</button></li>
-                            <li><strong>Renovation Contract B</strong> - Uptown - <button class="apply-btn">Apply</button></li>
+                        `<ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <strong>Painting Contract A</strong> - Downtown
+                                <button class="apply-btn btn btn-outline-primary btn-sm">Apply</button>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <strong>Renovation Contract B</strong> - Uptown
+                                <button class="apply-btn btn btn-outline-primary btn-sm">Apply</button>
+                            </li>
                         </ul>`
                     );
                 }
@@ -138,7 +206,7 @@
             $('#proposal-spinner').removeClass('hidden');
             setTimeout(function() {
                 $('#proposal-spinner').addClass('hidden');
-                $('#proposal-status').html('<span style="color:green;">Proposal submitted successfully!</span>');
+                $('#proposal-status').html('<span class="text-success">Proposal submitted successfully!</span>');
                 $('#proposal-form')[0].reset();
             }, 1200);
         });
@@ -150,15 +218,20 @@
             setTimeout(function() {
                 $('#subcontractor-spinner').addClass('hidden');
                 $('#subcontractor-list').html(
-                    `<ul>
-                        <li>Jane Doe - Electrician <button class="contact-btn">Contact</button></li>
-                        <li>John Smith - Plumber <button class="contact-btn">Contact</button></li>
+                    `<ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Jane Doe - Electrician
+                            <button class="contact-btn btn btn-outline-secondary btn-sm">Contact</button>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            John Smith - Plumber
+                            <button class="contact-btn btn btn-outline-secondary btn-sm">Contact</button>
+                        </li>
                     </ul>`
                 );
             }, 800);
         }
         $('#refresh-subcontractors').on('click', loadSubcontractors);
-        // Load on page ready
         $(loadSubcontractors);
 
         // Contact button for subcontractors
@@ -185,6 +258,23 @@
                 $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
                 $('#chat-spinner').addClass('hidden');
             }, 700);
+        });
+
+        // Navbar dropdown links to switch tabs dynamically
+        $('.portal-tab-link').on('click', function(e) {
+            e.preventDefault();
+            const tab = $(this).data('tab');
+            if(tab === 'vendor') {
+                $('#vendor-tab').tab('show');
+                $('html, body').animate({
+                    scrollTop: $('#portals-tabs').offset().top - 70
+                }, 400);
+            } else if(tab === 'admin') {
+                $('#admin-tab').tab('show');
+                $('html, body').animate({
+                    scrollTop: $('#portals-tabs').offset().top - 70
+                }, 400);
+            }
         });
     </script>
 </body>
