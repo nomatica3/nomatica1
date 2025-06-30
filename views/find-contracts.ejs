@@ -1,32 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <% include('partials/head') %>
-    <title>Find Contracts</title>
+  <% include('partials/head') %>
+  <title>Find Contracts</title>
 </head>
 <body>
-    <% include('partials/navbar') %>
-    <div class="container py-4">
-        <h1>Find Contracts</h1>
-        <form action="/contracts/search" method="GET" class="mb-4">
-            <label for="query">Search Contracts:</label>
-            <input type="text" id="query" name="query" placeholder="Enter keywords" required>
-            <button type="submit">Search</button>
-        </form>
-        <% if (contracts && contracts.length > 0) { %>
-            <h2>Results</h2>
-            <ul>
-                <% contracts.forEach(function(contract) { %>
-                    <li>
-                        <strong><%= contract.title %></strong><br>
-                        <span><%= contract.description %></span>
-                    </li>
-                <% }); %>
-            </ul>
-        <% } else if (typeof contracts !== 'undefined') { %>
-            <p>No contracts found.</p>
-        <% } %>
-    </div>
-    <% include('partials/footer') %>
+  <% include('partials/navbar') %>
+  <main class="container py-5 mt-5">
+    <h1>Find Contracts</h1>
+    <p>Contract listings here.</p>
+  </main>
+  <% include('partials/footer') %>
 </body>
 </html>
