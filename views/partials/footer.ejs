@@ -1,5 +1,4 @@
-<script>
-  <footer class="fixed-footer">
+<footer class="fixed-footer">
   <div class="footer-content position-relative">
     <span class="footer-copyright">
       &copy; 2025 Colorful Moves. All rights reserved.
@@ -17,12 +16,8 @@
     </div>
   </div>
 </footer>
-// Toggle chat assistant visibility
-$('#chat-toggle').on('click', function() {
-  $('#chat-assistant').toggle();
-});
 
-// Chat AI Assistant with loading spinner
+<script>
 $('#chat-form').on('submit', function(e) {
   e.preventDefault();
   const userMsg = $('#chat-input').val().trim();
