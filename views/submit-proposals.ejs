@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Proposal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Submit a Proposal</h1>
+        <form action="/submit-proposals" method="POST">
+            <div class="form-group">
+                <label for="title">Proposal Title</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="5" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="author">Your Name</label>
+                <input type="text" id="author" name="author" required>
+            </div>
+            <button type="submit">Submit Proposal</button>
+        </form>
+    </div>
+</body>
+</html>

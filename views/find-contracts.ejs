@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Find Contracts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>Find Contracts</h1>
+    </header>
+    <main>
+        <form action="/contracts/search" method="GET">
+            <label for="query">Search Contracts:</label>
+            <input type="text" id="query" name="query" placeholder="Enter keywords" required>
+            <button type="submit">Search</button>
+        </form>
+
+        <% if (contracts && contracts.length > 0) { %>
+            <h2>Results</h2>
+            <ul>
+                <% contracts.forEach(function(contract) { %>
+                    <li>
+                        <strong><%= contract.title %></strong><br>
+                        <span><%= contract.description %></span>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else if (typeof contracts !== 'undefined') { %>
+            <p>No contracts found.</p>
+        <% } %>
+    </main>
+</body>
+</html>
