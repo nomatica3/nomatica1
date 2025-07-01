@@ -23,3 +23,28 @@
     </div>
   </div>
 </nav>
+<div class="sidebar-menu">
+  <ul class="nav flex-column">
+    <li class="nav-item"><a class="nav-link" href="/new-chat">📝 New Chat</a></li>
+    <li class="nav-item"><a class="nav-link" href="/search-chats">🔍 Search Chats</a></li>
+    <li class="nav-item"><a class="nav-link" href="/library">📚 Library</a></li>
+    <li class="nav-item"><a class="nav-link" href="/images">🖼️ Images</a></li>
+    <li class="nav-item"><a class="nav-link" href="/videos">🎥 Videos</a></li>
+    <li class="nav-item"><a class="nav-link" href="/explore">🌐 Explore</a></li>
+  </ul>
+</div>
+<footer class="fixed-footer">
+  <div class="footer-content position-relative">
+    <span>&copy; 2025 Colorful Moves. All rights reserved.</span>
+    <div id="chat-footer-assistant">
+      <button id="chat-toggle" class="btn btn-outline-primary btn-sm">Chat AI</button>
+      <div id="chat-assistant">
+        <div id="chat-messages" class="mb-2"></div>
+        <form id="chat-form" autocomplete="off" class="d-flex">
+          <input type="text" id="chat-input" class="form-control me-2" placeholder="Ask me anything..." required/>
+          <button type="submit" class="btn btn-primary">Send</button>
+          <span id="chat-spinner" class="spinner hidden"></span>
+        </form>
+      </div>
+    </div>
+  </div>

@@ -50,4 +50,23 @@
 </script>
 
 </body>
+
+<footer class="fixed-footer">
+  <div class="footer-content position-relative">
+    <span>&copy; 2025 Colorful Moves. All rights reserved.</span>
+    <div id="chat-footer-assistant">
+      <button id="chat-toggle" class="btn btn-outline-primary btn-sm">Chat AI</button>
+      <div id="chat-assistant">
+        <div id="chat-messages" class="mb-2"></div>
+        <form id="chat-form" autocomplete="off" class="d-flex">
+          <input type="text" id="chat-input" class="form-control me-2" placeholder="Ask me anything..." required/>
+          <button type="submit" class="btn btn-primary">Send</button>
+          <span id="chat-spinner" class="spinner hidden"></span>
+        </form>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="/script.js"></script>
+</body>
 </html>
