@@ -1,6 +1,5 @@
 {
   "name": "colorful-moves",
-  "type": "module",
   "version": "1.0.0",
   "description": "A dynamic Node.js app using Express and EJS",
   "main": "server.js",
