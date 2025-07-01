@@ -1,34 +1,93 @@
-<!-- views/admin-portal.ejs -->
-<%- include('partials/head', { title: 'Admin Portal - Colorful Moves' }) %>
-<%- include('partials/navbar') %>
+<%- include('partials/header', { title: 'Admin Portal' }) %>
+<%- include('partials/sidebar') %>
 
 <div class="container py-4">
-  <h1>Admin Portal Workspace</h1>
-  <div class="workspace-card">
+  <h1>Admin Portal</h1>
+  <div class="workspace-card mb-3">
     <h4>CRM Monitoring</h4>
-    <!-- CRM dashboard widgets -->
+    <p>Overview of customer interactions.</p>
   </div>
-  <div class="workspace-card">
+  <div class="workspace-card mb-3">
     <h4>Supply Updates</h4>
-    <!-- Supply chain status -->
+    <p>Supply chain and stock status.</p>
   </div>
-  <div class="workspace-card">
+  <div class="workspace-card mb-3">
     <h4>Profit & Loss</h4>
-    <!-- P&L summary -->
+    <p>P&L summary reports.</p>
   </div>
-  <div class="workspace-card">
+  <div class="workspace-card mb-3">
     <h4>Human Resources</h4>
-    <!-- 1099/subcontractor onboarding, status, etc. -->
+    <p>Subcontractor onboarding and HR tasks.</p>
   </div>
 </div>
 
 <%- include('partials/footer') %>
-
+<script>
+  // You can add any JavaScript specific to this page here
+  console.log('Admin Portal page loaded');
+</script>
+<style>
+  /* You can add any CSS specific to this page here */
+  body {
+    background-color: #f8f9fa;
+  }
+  h1 {
+    color: #343a40;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+</style>
 <style>
   .workspace-card {
-    background: #f8f9fa;
-    border-radius: 10px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .workspace-card h4 {
+    margin-bottom: 10px;
+  }
+  .workspace-card p {
+    color: #6c757d;
+  }
+</style>
+<style>
+  .workspace-card {
+    transition: transform 0.2s; /* Smooth hover effect */
+  }
+  .workspace-card:hover {
+    transform: scale(1.05);
+  }
+</style>
+<style>
+  .workspace-card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  .workspace-card h4 {
+    color: #007bff; /* Bootstrap primary color */
+  }
+  .workspace-card p {
+    font-size: 0.9rem; /* Slightly smaller text for description */
+  }
+</style>
+<style>
+  .workspace-card {
+    background-color: #f8f9fa; /* Lighter background for contrast */
+    border: none; /* Remove border for a cleaner look */
+  }
+  .workspace-card h4 {
+    font-weight: bold; /* Make headings more prominent */
+  }
+  .workspace-card p {
+    color: #495057; /* Darker text for better readability */
+  }
+</style>
+<style>
+  .workspace-card {
+    padding: 30px; /* More padding for a spacious feel */
   }
 </style>
