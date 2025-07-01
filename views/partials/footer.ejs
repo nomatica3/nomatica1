@@ -8,7 +8,7 @@
       <div id="chat-assistant">
         <div id="chat-messages" class="mb-2"></div>
         <form id="chat-form" autocomplete="off" class="d-flex">
-          <input type="text" id="chat-input" class="form-control me-2" placeholder="Ask me anything..." required />
+          <input type="text" id="chat-input" class="form-control me-2" placeholder="Ask me anything..." required/>
           <button type="submit" id="chat-send" class="btn btn-primary">Send</button>
           <span id="chat-spinner" class="spinner hidden"></span>
         </form>
@@ -18,33 +18,36 @@
 </footer>
 
 <script>
-$('#chat-form').on('submit', function(e) {
-  e.preventDefault();
-  const userMsg = $('#chat-input').val().trim();
-  if (!userMsg) return;
-  $('#chat-messages').append('<div class="chat-message user">You: ' + $('<div>').text(userMsg).html() + '</div>');
-  $('#chat-input').val('');
-  $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
-  $('#chat-spinner').removeClass('hidden');
-
-  setTimeout(function() {
-    let aiResponse = "I'm your AI assistant. How can I help you?";
-    if (/contract|proposal|subcontractor|vendor|admin/i.test(userMsg)) {
-      aiResponse = "Let me help you with information about " + userMsg + ".";
-    }
-    $('#chat-messages').append('<div class="chat-message ai">AI: ' + $('<div>').text(aiResponse).html() + '</div>');
+  $('#chat-toggle').on('click', function() {
+    $('#chat-assistant').toggle();
+  });
+  $('#chat-form').on('submit', function(e) {
+    e.preventDefault();
+    const userMsg = $('#chat-input').val().trim();
+    if (!userMsg) return;
+    $('#chat-messages').append('<div class="chat-message user">You: ' + $('<div>').text(userMsg).html() + '</div>');
+    $('#chat-input').val('');
     $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
-    $('#chat-spinner').addClass('hidden');
-  }, 700);
-});
-
-// Hide chat on click outside
-$(document).on('mousedown touchstart', function(e) {
-  if (
-    $('#chat-assistant').is(':visible') &&
-    !$(e.target).closest('#chat-assistant, #chat-toggle').length
-  ) {
-    $('#chat-assistant').hide();
-  }
-});
+    $('#chat-spinner').removeClass('hidden');
+    setTimeout(function() {
+      let aiResponse = "I'm your AI assistant. How can I help you?";
+      if (/contract|proposal|subcontractor|vendor|admin/i.test(userMsg)) {
+        aiResponse = "Let me help you with information about " + userMsg + ".";
+      }
+      $('#chat-messages').append('<div class="chat-message ai">AI: ' + $('<div>').text(aiResponse).html() + '</div>');
+      $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
+      $('#chat-spinner').addClass('hidden');
+    }, 700);
+  });
+  $(document).on('mousedown touchstart', function(e) {
+    if (
+      $('#chat-assistant').is(':visible') &&
+      !$(e.target).closest('#chat-assistant, #chat-toggle').length
+    ) {
+      $('#chat-assistant').hide();
+    }
+  });
 </script>
+
+</body>
+</html>

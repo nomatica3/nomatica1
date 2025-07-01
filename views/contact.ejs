@@ -1,0 +1,19 @@
+<% if (success) { %>
+  <div class="alert alert-success">
+    Thank you <%= name %>! Your message has been received.
+  </div>
+<% } %>
+<% if (error) { %>
+  <div class="alert alert-danger">
+    <%= error %>
+  </div>
+<% } %>
+<form action="/contact" method="POST">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" name="name" required>
+  </div>
+  <div class="form-group">  
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" name="email" required>
+  </div>

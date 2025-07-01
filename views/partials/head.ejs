@@ -1,33 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <% include('partials/head') %>
-  <title><%= typeof title !== 'undefined' ? title : 'Colorful Moves' %></title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= title %></title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="/styles.css"/>
+
+  <style>
+  body {
+      background: #fff;
+      color: #181a1b;
+      min-height: 100vh;
+  }
+  .navbar, .fixed-footer {
+      background: #f8f9fa !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .navbar-brand {
+      color: #181a1b !important;
+      font-weight: bold;
+      margin-right: 2rem;
+      margin-left: 0 !important;
+  }
+  .navbar-nav .nav-link, .dropdown-item, .navbar-toggler-icon {
+      color: #181a1b !important;
+  }
+  .nav-link.active, .nav-link:focus, .nav-link:hover {
+      color: #4a90e2 !important;
+  }
+  .dropdown-menu {
+      background: #fff;
+  }
+  .dropdown-item:hover, .dropdown-item:focus {
+      background: #f1f1f1;
+      color: #4a90e2;
+  }
+  .fixed-footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      z-index: 1030;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+      padding: 0;
+  }
+  .footer-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      padding: 0 2rem;
+      width: 100%;
+  }
+  .footer-copyright {
+      color: #181a1b;
+      font-size: 1rem;
+      white-space: nowrap;
+  }
+  #chat-footer-assistant {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+  }
+  #chat-assistant {
+      background: #f8f9fa;
+      color: #181a1b;
+      border-radius: 8px;
+      padding: 10px;
+      margin-left: 1rem;
+      max-width: 320px;
+      min-width: 220px;
+      max-height: 200px;
+      overflow-y: auto;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      display: none;
+      position: absolute;
+      bottom: 70px;
+      right: 2rem;
+  }
+  #chat-messages {
+      max-height: 100px;
+      overflow-y: auto;
+      margin-bottom: 8px;
+  }
+  .chat-message.user { color: #4a90e2; }
+  .chat-message.ai { color: #181a1b; }
+  .spinner {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border: 3px solid #dee2e6;
+      border-top: 3px solid #4a90e2;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-left: 10px;
+      vertical-align: middle;
+  }
+  .hidden { display: none; }
+  @media (max-width: 991.98px) {
+      .navbar .container-fluid {
+          flex-direction: column;
+          align-items: flex-start !important;
+      }
+      .navbar-brand {
+          margin-right: 0;
+          margin-bottom: 0.25rem;
+          margin-left: 0 !important;
+      }
+      .navbar-collapse {
+          width: 100%;
+      }
+      .navbar-nav {
+          width: 100%;
+          justify-content: flex-start !important;
+      }
+      .footer-content {
+          flex-direction: column;
+          align-items: stretch;
+          height: auto;
+          padding: 1rem 1rem 0.5rem 1rem;
+      }
+      #chat-footer-assistant {
+          margin-left: 0;
+          margin-top: 0.5rem;
+          justify-content: flex-end;
+          width: 100%;
+      }
+      #chat-assistant {
+          right: 1rem;
+          left: 1rem;
+          max-width: 95vw;
+      }
+  }
+  @media (max-width: 575.98px) {
+      .footer-content {
+          padding: 0.5rem 0.5rem 0.25rem 0.5rem;
+      }
+      .navbar-brand {
+          font-size: 1.25rem;
+      }
+  }
+  </style>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-  <% include('partials/navbar') %> 
-  <div class="container py-4">
-    <h1>Vendor Portal Workspace</h1>
-    <div class="workspace-card">
-      <h4>Submit Documentation</h4>
-      <form>
-        <input type="file" class="form-control mb-2" />
-        <input type="text" class="form-control mb-2" placeholder="License Number" />
-        <textarea class="form-control mb-2" placeholder="Updates or Notes"></textarea>
-        <button class="btn btn-primary">Upload</button>
-      </form>
-    </div>
-    <div class="workspace-card">
-      <h4>Photo Gallery</h4>
-      <!-- Thumbnails of uploaded photos -->
-    </div>
-    <div class="workspace-card">
-      <h4>Recent Updates</h4>
-      <!-- List of updates -->
-    </div>
-  </div>
-  <% include('partials/footer') %>
-</body>
-</html>

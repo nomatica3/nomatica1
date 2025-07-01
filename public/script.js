@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Create a moving, colorful, interactive div
+    // ========== MOVING COLORFUL DIV ==========
     const mover = document.createElement('div');
     mover.style.position = 'fixed';
     mover.style.width = '100px';
@@ -35,10 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
         mover.style.transform = `rotate(${Math.floor(Math.random()*360)}deg) scale(${0.8 + Math.random()*0.8})`;
     }
 
-    // Click to instantly move and change color
     mover.addEventListener('click', moveAndColor);
 
-    // Hover to pulse
     mover.addEventListener('mouseenter', () => {
         mover.style.transition = 'all 0.3s cubic-bezier(.68,-0.55,.27,1.55)';
         mover.style.transform = mover.style.transform.replace(/scale\([^)]+\)/, 'scale(1.2)');
@@ -48,11 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
         mover.style.transform = mover.style.transform.replace(/scale\([^)]+\)/, 'scale(1)');
     });
 
-    // Move on interval
     let intervalId = setInterval(moveAndColor, 1000);
     moveAndColor();
 
-    // Pause movement on hover, resume on leave
     mover.addEventListener('mouseenter', () => {
         clearInterval(intervalId);
     });
@@ -60,6 +56,64 @@ document.addEventListener('DOMContentLoaded', () => {
         intervalId = setInterval(moveAndColor, 1000);
     });
 
-    // Responsive: move if window resizes
     window.addEventListener('resize', moveAndColor);
-});
+// ========== CHAT AI ASSISTANT ==========
+const chatToggle = document.getElementById('chat-toggle');
+const chatAssistant = document.getElementById('chat-assistant');
+const chatForm = document.getElementById('chat-form');
+const chatInput = document.getElementById('chat-input');
+const chatMessages = document.getElementById('chat-messages');
+const chatSpinner = document.getElementById('chat-spinner');
+
+if (chatToggle && chatAssistant && chatForm && chatInput && chatMessages && chatSpinner) {
+    // Toggle visibility
+    chatToggle.addEventListener('click', () => {
+        chatAssistant.style.display = chatAssistant.style.display === 'none' || chatAssistant.style.display === '' ? 'block' : 'none';
+    });
+
+    // Submit chat
+    chatForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const userMsg = chatInput.value.trim();
+        if (!userMsg) return;
+        const userDiv = document.createElement('div');
+        userDiv.className = 'chat-message user';
+        userDiv.textContent = `You: ${userMsg}`;
+        chatMessages.appendChild(userDiv);
+        chatInput.value = '';
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        chatSpinner.classList.remove('hidden');
+
+        // Fetch AI response from backend
+        try {
+            const response = await fetch('/api/ai-chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt: userMsg })
+            });
+            const data = await response.json();
+            const aiDiv = document.createElement('div');
+            aiDiv.className = 'chat-message ai';
+            aiDiv.textContent = `AI: ${data.response || data.error || 'Sorry, no response.'}`;
+            chatMessages.appendChild(aiDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        } catch (err) {
+            const aiDiv = document.createElement('div');
+            aiDiv.className = 'chat-message ai';
+            aiDiv.textContent = 'AI: Sorry, there was a problem contacting the AI.';
+            chatMessages.appendChild(aiDiv);
+        }
+        chatSpinner.classList.add('hidden');
+    });
+
+    // Hide on click outside
+    document.addEventListener('mousedown', (e) => {
+        if (
+            chatAssistant.style.display === 'block' &&
+            !chatAssistant.contains(e.target) &&
+            !chatToggle.contains(e.target)
+        ) {
+            chatAssistant.style.display = 'none';
+        }
+    });
+}

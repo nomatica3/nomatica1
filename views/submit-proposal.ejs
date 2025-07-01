@@ -1,39 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <% include('partials/head') %>
-    <title>Submit Proposal</title>
-</head>
-<body>
-    <% include('partials/navbar') %>
-    <div class="container py-4">
-        <h1>Submit a Proposal</h1>
-        <form action="/submit-proposals" method="POST">
-            <div class="mb-3">
-                <label for="title">Proposal Title</label>
-                <input type="text" id="title" name="title" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="description">Description</label>
-                <textarea id="description" name="description" rows="5" class="form-control" required></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="author">Your Name</label>
-                <input type="text" id="author" name="author" class="form-control" required minlength="2" maxlength="50">
-            </div>
-            <div class="mb-3">
-                <label for="email">Your Email</label>
-                <input type="email" id="email" name="email" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit Proposal</button>
-        </form>
-        <% if (typeof success !== 'undefined') { %>
-            <div class="alert alert-success mt-3"><%= success %></div>
-        <% } %>
-        <% if (typeof error !== 'undefined') { %>
-            <div class="alert alert-danger mt-3"><%= error %></div>
-        <% } %>
+<%- include('partials/head', { title: 'Submit Proposal - Colorful Moves' }) %>
+<%- include('partials/navbar') %>
+
+<div class="container py-4">
+  <h1>Submit Proposal</h1>
+  <p>Upload and manage your proposals for available contracts.</p>
+  <form>
+    <div class="mb-3">
+      <label for="proposalFile" class="form-label">Upload Proposal File</label>
+      <input type="file" class="form-control" id="proposalFile">
     </div>
-    <% include('partials/footer') %>
-</body>
-</html>
+    <button type="submit" class="btn btn-primary">Submit Proposal</button>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

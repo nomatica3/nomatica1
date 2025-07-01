@@ -1,26 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <% include('partials/head') %>
-    <title>Local Subcontractors</title>
-</head>
-<body>
-    <% include('partials/navbar') %>
-    <div class="container py-4">
-        <h1>Local Subcontractors</h1>
-        <% if (subcontractors && subcontractors.length > 0) { %>
-            <ul>
-                <% subcontractors.forEach(function(sub) { %>
-                    <li>
-                        <strong><%= sub.name %></strong> - <%= sub.trade %><br>
-                        <span><%= sub.contact %></span>
-                    </li>
-                <% }); %>
-            </ul>
-        <% } else { %>
-            <p>No subcontractors found.</p>
-        <% } %>
-    </div>
-    <% include('partials/footer') %>
-</body>
-</html>
+<%- include('partials/head', { title: 'Local Subcontractors - Colorful Moves' }) %>
+<%- include('partials/navbar') %>
+
+<div class="container py-4">
+  <h1>Local Subcontractors</h1>
+  <p>Connect with trusted local subcontractors to help you complete projects.</p>
+</div>
+
+<%- include('partials/footer') %>

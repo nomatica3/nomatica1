@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 const path = require('path');
 const app = express();
@@ -52,4 +54,20 @@ app.get('/item/:id', (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+});
+// Show contact form
+app.get('/contact', (req, res) => {
+  res.render('contact');
+});
+
+// Handle contact form submission
+app.post('/contact', (req, res) => {
+  const { name, email, message } = req.body;
+  console.log('Contact Form:', { name, email, message });
+  // You could save to a database or email here
+  res.render('contact', { success: true, name });
+});
+// Show AI chat interface
+app.get('/ai-chat', (req, res) => { 
+  res.render('ai-chat');
 });
