@@ -1,8 +1,10 @@
 <footer class="fixed-footer">
-  <div class="footer-content position-relative">
-    <span>&copy; <%= new Date().getFullYear() %> Colorful Moves. All rights reserved.</span>
-    <div id="chat-footer-assistant">
-      <button id="chat-toggle" class="btn btn-outline-primary btn-sm">Chat AI</button>
+  <div class="footer-content container-fluid d-flex justify-content-between align-items-center">
+    <span class="footer-copyright">
+      &copy; <%= new Date().getFullYear() %> Colorful Moves. All rights reserved.
+    </span>
+    <div id="chat-footer-assistant" class="d-flex align-items-center">
+      <button id="chat-toggle" class="btn btn-outline-primary btn-sm">💬 Chat AI</button>
       <div id="chat-assistant">
         <div id="chat-messages" class="mb-2"></div>
         <form id="chat-form" autocomplete="off" class="d-flex">
