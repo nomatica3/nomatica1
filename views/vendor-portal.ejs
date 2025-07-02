@@ -1,22 +1,11 @@
-<%- include('partials/head', { title: 'Vendor Portal - Colorful Moves' }) %>
-<%- include('partials/navbar') %>
+<%- include('partials/header', { title: 'Vendor Portal - Colorful Moves' }) %>
+<%- include('partials/sidebar') %>
 
 <div class="container py-4">
   <h1>Vendor Portal</h1>
   <p>Manage your vendor profile, submit documentation, and stay updated.</p>
-
-  <div class="card p-3 mb-3">
-    <h5>Submit Documentation</h5>
-    <form>
-      <div class="mb-2">
-        <input type="file" class="form-control mb-2" />
-        <input type="text" class="form-control mb-2" placeholder="License Number" />
-        <textarea class="form-control mb-2" placeholder="Updates or Notes"></textarea>
-      </div>
-      <button class="btn btn-primary">Upload</button>
-    </form>
-  </div>
 </div>
 <script src="/script.js"></script>
-
 <%- include('partials/footer') %>
+
+
