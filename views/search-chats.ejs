@@ -4,6 +4,18 @@
 <div class="container py-4">
   <h1>Search Chats</h1>
   <p>Search your chat history.</p>
+  <form id="searchForm">
+    <div class="mb-3">
+      <label for="searchQuery" class="form-label">Search Query</label>
+      <input type="text" class="form-control" id="searchQuery" placeholder="Enter search terms">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+  <div id="searchResults" class="mt-4">
+    <h2>Results</h2>
+    <ul id="resultsList" class="list-group">
+      <!-- Search results will be populated here -->
+    </ul>
 </div>
 <script src="/script.js"></script>
 <%- include('partials/footer') %>
