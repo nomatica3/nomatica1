@@ -1,6 +1,6 @@
 # Nomatica1
 
-Welcome to the **Nomatica1** project!
+Welcome to the **CAPS** project!
 
 ## Overview
 

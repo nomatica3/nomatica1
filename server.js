@@ -71,3 +71,14 @@ app.post('/contact', (req, res) => {
 app.get('/ai-chat', (req, res) => { 
   res.render('ai-chat');
 });
+app.use(express.static(path.join(__dirname, 'public')));
+// Handle AI chat requests
+app.post('/api/ai-chat', async (req, res) => {
+  const { prompt } = req.body;
+  console.log('AI Chat Prompt:', prompt);
+  
+  // Simulate AI response (replace with actual AI service call)
+  const aiResponse = `AI Response to: ${prompt}`;
+  
+  res.json({ response: aiResponse });
+});

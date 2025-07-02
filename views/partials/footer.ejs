@@ -3,18 +3,21 @@
     <span class="footer-copyright">
       &copy; <%= new Date().getFullYear() %> Colorful Moves. All rights reserved.
     </span>
-    <div id="chat-footer-assistant" class="d-flex align-items-center">
-      <button id="chat-toggle" class="btn btn-outline-primary btn-sm">💬 Chat AI</button>
-      <div id="chat-assistant">
-        <div id="chat-messages" class="mb-2"></div>
-        <form id="chat-form" autocomplete="off" class="d-flex">
-          <input type="text" id="chat-input" class="form-control me-2" placeholder="Ask me anything..." required/>
-          <button type="submit" class="btn btn-primary">Send</button>
-          <span id="chat-spinner" class="spinner hidden"></span>
-        </form>
-      </div>
-    </div>
+    <button id="chat-toggle" class="btn btn-outline-primary btn-sm">
+      💬 Chat AI
+    </button>
   </div>
 </footer>
-</body>
-</html>
+
+<!-- Chat Widget -->
+<div id="chat-widget">
+  <div id="chat-header">
+    <span>Chat AI Assistant</span>
+    <button id="chat-close">&times;</button>
+  </div>
+  <div id="chat-messages"></div>
+  <form id="chat-form" autocomplete="off">
+    <input type="text" id="chat-input" placeholder="Ask me something..." required/>
+    <button type="submit">Send</button>
+  </form>
+</div>

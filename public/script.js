@@ -117,3 +117,34 @@ if (chatToggle && chatAssistant && chatForm && chatInput && chatMessages && chat
         }
     });
 }
+document.getElementById('chat-toggle').addEventListener('click', () => {
+  document.getElementById('chat-widget').style.display = 'flex';
+});
+
+document.getElementById('chat-close').addEventListener('click', () => {
+  document.getElementById('chat-widget').style.display = 'none';
+});
+
+document.getElementById('chat-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const input = document.getElementById('chat-input');
+  const message = input.value.trim();
+  if (!message) return;
+
+  const messagesDiv = document.getElementById('chat-messages');
+  const userMsg = document.createElement('div');
+  userMsg.textContent = "You: " + message;
+  messagesDiv.appendChild(userMsg);
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+  input.value = "";
+
+  // Here you can add logic to send to server/OpenAI and append AI reply
+  const aiMsg = document.createElement('div');
+  aiMsg.textContent = "AI: I'm here to help!";
+  messagesDiv.appendChild(aiMsg);
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+});
+// ========== END CHAT AI ASSISTANT ==========
+}
+});
