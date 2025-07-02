@@ -6,20 +6,34 @@
   <div class="workspace-card mb-3">
     <h4>CRM Monitoring</h4>
     <p>Overview of customer interactions.</p>
+    <button class="btn btn-primary" onclick="window.location.href='/crm'">Go to CRM</button>
+    <form action="/crm" method="post" class="mt-3">
+      <button type="submit" class="btn btn-secondary">CRM Actions</button>
+    </form>
   </div>
   <div class="workspace-card mb-3">
     <h4>Supply Updates</h4>
     <p>Supply chain and stock status.</p>
+    <button class="btn btn-primary" onclick="window.location.href='/supply'">Go to Supply</button>
+    <form action="/supply" method="post" class="mt-3">  
+      <button type="submit" class="btn btn-secondary">Supply Actions</button>
+    </form>
   </div>
   <div class="workspace-card mb-3">
     <h4>Profit & Loss</h4>
     <p>P&L summary reports.</p>
+    <button class="btn btn-primary" onclick="window.location.href='/profit-loss'">Go to P&L</button>
+    <form action="/profit-loss" method="post" class="mt-3">
+      <button type="submit" class="btn btn-secondary">P&L Actions</button>
+    </form>
   </div>
   <div class="workspace-card mb-3">
     <h4>Human Resources</h4>
     <p>Subcontractor onboarding and HR tasks.</p>
+    <button class="btn btn-primary" onclick="window.location.href='/hr'">Go to HR</button>
+    <form action="/hr" method="post" class="mt-3">
+      <button type="submit" class="btn btn-secondary">HR Actions</button
   </div>
 </div>
 <script src="/script.js"></script>
 <%- include('partials/footer') %>
-<
