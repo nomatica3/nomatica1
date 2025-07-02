@@ -215,3 +215,22 @@ body {
   border: 1px solid #ddd;
   border-radius: 4px;
 }
+/* Hide sidebar and toggle on small screens */
+@media (max-width: 767px) {
+  .sidebar-menu {
+    display: none !important;
+  }
+  .sidebar-toggle-btn {
+    display: none !important;
+  }
+}
+
+/* Default sidebar hidden */
+.sidebar-menu {
+  display: none;
+}
+
+/* Sidebar visible when active */
+.sidebar-menu.active {
+  display: block;
+}

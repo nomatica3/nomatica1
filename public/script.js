@@ -180,3 +180,18 @@ async function sendToCAPS() {
   document.getElementById('chatResponse').innerText = data.response;
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+  const toggleBtn = document.getElementById('sidebarToggle');
+  const sidebar = document.getElementById('sidebarMenu');
+
+  toggleBtn.addEventListener('click', function () {
+    sidebar.classList.toggle('active');
+
+    if (sidebar.classList.contains('active')) {
+      toggleBtn.textContent = '✖ Close Sidebar';
+    } else {
+      toggleBtn.textContent = '☰ Open Sidebar';
+    }
+  });
+});
+// ========== END RESPONSIVE DESIGN FOR SIDEBAR ==========
