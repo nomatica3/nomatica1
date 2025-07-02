@@ -1,8 +1,10 @@
-<div class="container py-4 text-center">
-  
-  <h1>CAPS</h1>
-  <p>The most powerful AI-driven platform for custom automations.</p>
+<%- include('partials/header', { title: 'Home' }) %>
+<%- include('partials/sidebar') %>
 
+<div class="container py-4 text-center">
+  <h1>CAPS</h1>
+  <p>The most powerful AI driven platform for custom automations.</p>
+</div>
   <div class="chat-box mt-4">
     <input type="text" id="userMessage" class="form-control" placeholder="Ask CAPS to automate something...">
     <button class="btn btn-primary mt-2" onclick="sendToCAPS()">Ask</button>
@@ -10,4 +12,6 @@
   </div>
 </div>
 
+<script src="/script.js"></script>
+<%- include('partials/footer') %>
 
