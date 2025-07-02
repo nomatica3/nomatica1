@@ -204,3 +204,14 @@ body {
     margin-left: 0;
   }
 }
+.chat-box {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: left;
+}
+#chatResponse {
+  background: #f8f9fa;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}

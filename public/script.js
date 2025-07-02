@@ -164,3 +164,19 @@ document.getElementById('chat-form').addEventListener('submit', (e) => {
   });
 </script>
 // ========== RESPONSIVE DESIGN FOR SIDEBAR ==========
+async function sendToCAPS() {
+  const input = document.getElementById('userMessage').value.trim();
+  if (!input) return;
+
+  document.getElementById('chatResponse').innerText = 'Processing...';
+
+  const res = await fetch('/api/caps', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query: input })
+  });
+
+  const data = await res.json();
+  document.getElementById('chatResponse').innerText = data.response;
+}
+
