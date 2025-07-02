@@ -155,3 +155,12 @@ document.getElementById('chat-form').addEventListener('submit', (e) => {
 // ========== END CHAT AI ASSISTANT ==========
 }
 });
+<script>
+  const toggleBtn = document.getElementById('sidebarToggle');
+  const sidebar = document.getElementById('sidebarMenu');
+
+  toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+  });
+</script>
+// ========== RESPONSIVE DESIGN FOR SIDEBAR ==========
