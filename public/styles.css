@@ -102,6 +102,28 @@ body {
   z-index: 1030;
 }
 
+/* Footer spacing for desktop */
+.footer-content > * {
+  margin-right: 2rem;
+}
+.footer-content > *:last-child {
+  margin-right: 0;
+}
+
+/* Footer tabbed layout and spacing for mobile */
+@media (max-width: 767px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2.5rem;
+  }
+  .footer-content > * {
+    margin-right: 0;
+    margin-left: 2rem;
+    /* Simulate 4 tabs (4 x 0.5rem = 2rem) */
+  }
+}
+
 .footer-content {
   display: flex;
   justify-content: space-between;
