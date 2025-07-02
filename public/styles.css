@@ -172,12 +172,13 @@ body {
 .fixed-footer {
   position: fixed;
   left: 0;
-  bottom: 0;
+  bottom: 0;      /* <-- This is the key */
   width: 100%;
-  background: #f8f9fa;
-  box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+  background-color: #212529; /* dark bg */
+  color: #ffffff;
   padding: 0.5rem 1rem;
-  z-index: 999;
+  z-index: 1030;  /* stays on top of content */
+}
 }
 
 /* Footer content */
