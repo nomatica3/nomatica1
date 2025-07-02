@@ -196,8 +196,8 @@ body {
   width: 320px;
   max-width: 90vw;
   background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.15);
   display: none;
   flex-direction: column;

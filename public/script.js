@@ -70,6 +70,13 @@ if (chatToggle && chatAssistant && chatForm && chatInput && chatMessages && chat
     chatToggle.addEventListener('click', () => {
         chatAssistant.style.display = chatAssistant.style.display === 'none' || chatAssistant.style.display === '' ? 'block' : 'none';
     });
+document.getElementById('chat-toggle').addEventListener('click', () => {
+  document.getElementById('chat-widget').style.display = 'block';
+});
+
+document.getElementById('chat-close').addEventListener('click', () => {
+  document.getElementById('chat-widget').style.display = 'none';
+});
 
     // Submit chat
     chatForm.addEventListener('submit', async (e) => {
