@@ -180,20 +180,25 @@ async function sendToCAPS() {
   document.getElementById('chatResponse').innerText = data.response;
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  const toggleBtn = document.getElementById('sidebarToggle');
-  const sidebar = document.getElementById('sidebarMenu');
 
-  toggleBtn.addEventListener('click', function () {
-    sidebar.classList.toggle('active');
-
-    if (sidebar.classList.contains('active')) {
-      toggleBtn.textContent = '✖ Close Sidebar';
-    } else {
-      toggleBtn.textContent = '☰ Open Sidebar';
-    }
-  });
-});
 // ========== END RESPONSIVE DESIGN FOR SIDEBAR ==========
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggleBtn = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sidebarMenu');
+
+    if (toggleBtn && sidebar) {
+      toggleBtn.addEventListener('click', function () {
+        sidebar.classList.toggle('active');
+        if (sidebar.classList.contains('active')) {
+          toggleBtn.textContent = '✖ Close Sidebar';
+        } else {
+          toggleBtn.textContent = '☰ Open Sidebar';
+        }
+      });
+    }
+  });
+</script>
