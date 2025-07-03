@@ -195,3 +195,5 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 // ========== END RESPONSIVE DESIGN FOR SIDEBAR ==========
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
