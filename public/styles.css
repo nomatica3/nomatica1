@@ -1,145 +1,28 @@
-app.use(express.static(path.join(__dirname, 'public')));
-
-/* Colorful Moves Animation Styles with More Dynamic Features */
-
+/* Animation example */
 @keyframes colorful-move {
-    0% {
-        background: linear-gradient(135deg, #ff6f61, #6ec6ff);
-        transform: translateX(0) scale(1) rotate(0deg);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-    }
-    20% {
-        background: linear-gradient(135deg, #6ec6ff, #ffd54f);
-        transform: translateX(40px) scale(1.1) rotate(8deg);
-        box-shadow: 0 8px 24px rgba(110,198,255,0.25);
-    }
-    40% {
-        background: linear-gradient(135deg, #ffd54f, #81c784);
-        transform: translateX(0) scale(1.2) rotate(-8deg);
-        box-shadow: 0 12px 28px rgba(255,213,79,0.25);
-    }
-    60% {
-        background: linear-gradient(135deg, #81c784, #ff6f61);
-        transform: translateX(-40px) scale(1.1) rotate(8deg);
-        box-shadow: 0 8px 24px rgba(129,199,132,0.25);
-    }
-    80% {
-        background: linear-gradient(135deg, #ff6f61, #6ec6ff);
-        transform: translateX(0) scale(1) rotate(-8deg);
-        box-shadow: 0 4px 20px rgba(255,111,97,0.15);
-    }
-    100% {
-        background: linear-gradient(135deg, #ff6f61, #6ec6ff);
-        transform: translateX(0) scale(1) rotate(0deg);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-    }
+  0% {
+    background: linear-gradient(135deg, #ff6f61, #6ec6ff);
+    transform: translateX(0) scale(1) rotate(0deg);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  100% {
+    background: linear-gradient(135deg, #ff6f61, #6ec6ff);
+    transform: translateX(0) scale(1) rotate(0deg);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
 }
 
 .colorful-move {
-    display: inline-block;
-    padding: 1rem 2rem;
-    color: #fff;
-    font-weight: bold;
-    border-radius: 1.5rem;
-    animation: colorful-move 2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
-    transition: box-shadow 0.3s, filter 0.3s;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-    cursor: pointer;
-    filter: brightness(1);
-}
-
-.colorful-move:hover {
-    filter: brightness(1.15) saturate(1.2);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-    animation-play-state: paused;
-}
-
-
-/* Dropdown Menu Styles */
-.dropdown-menu {
-  max-height: 60vh;
-  overflow-y: auto;
-}
-.sidebar-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 220px;
-  background: #f8f9fa;
-  overflow-y: auto;
-  padding-top: 60px;
-  border-right: 1px solid #ddd;
-  z-index: 1031;
-}
-
-.sidebar-menu .nav-link {
-  color: #181a1b;
-  padding: 12px 16px;
-  display: block;
-}
-.sidebar-menu .nav-link:hover {
-  background: #e9ecef;
-  color: #4a90e2;
-}
-body {
-  margin-left: 220px;
-}
-/* Sidebar Menu Styles */
-.sidebar-menu .nav-link.active {
-  background: #e9ecef;
-  color: #4a90e2;
+  display: inline-block;
+  padding: 1rem 2rem;
+  color: #fff;
   font-weight: bold;
-}   
-.fixed-footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background: #f8f9fa;
-  box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
-  padding: 0.5rem 1rem;
-  z-index: 1030;
+  border-radius: 1.5rem;
+  animation: colorful-move 2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  cursor: pointer;
 }
 
-.simple-footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background: #f8f9fa;
-  border-top: 1px solid #ddd;
-  padding: 0.75rem 1rem;
-  box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
-  z-index: 100;
-  font-size: 0.9rem;
-}
-
-.simple-footer .footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.simple-footer a {
-  color: #4a90e2;
-  text-decoration: none;
-}
-
-.simple-footer a:hover {
-  text-decoration: underline;
-}
-
-/* Optional mobile adjustments */
-@media (max-width: 575px) {
-  .simple-footer .footer-content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-}
-/* Desktop default: sidebar visible */
+/* Sidebar styles */
 .sidebar-menu {
   position: fixed;
   top: 0;
@@ -153,7 +36,6 @@ body {
   z-index: 1030;
 }
 
-/* Sidebar nav links */
 .sidebar-menu .nav-link {
   color: #181a1b;
   padding: 12px 16px;
@@ -165,12 +47,11 @@ body {
   color: #4a90e2;
 }
 
-/* Sidebar toggle button: hidden on desktop */
 .sidebar-toggle-btn {
   display: none;
 }
 
-/* Mobile: hide sidebar by default */
+/* Mobile toggle */
 @media (max-width: 767px) {
   .sidebar-menu {
     transform: translateX(-100%);
@@ -191,15 +72,10 @@ body {
     border-radius: 4px;
     font-size: 1rem;
     z-index: 1100;
-    cursor: pointer;
-  }
-  /* Remove left margin on body for mobile */
-  body {
-    margin-left: 0;
   }
 }
 
-/* Body margin for desktop to avoid content under sidebar */
+/* For desktop: push content right */
 @media (min-width: 768px) {
   body {
     margin-left: 220px;
