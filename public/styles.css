@@ -1,46 +1,51 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  display: flex;
+}
+
 /* Sidebar */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
   width: 220px;
-  background: #f8f9fa;
+  height: 100vh;
+  background: #f1f3f5;
+  padding-top: 1rem;
   border-right: 1px solid #ddd;
   overflow-y: auto;
-  z-index: 1030;
+  z-index: 1000;
 }
-.sidebar .nav-link {
-  color: #181a1b;
-  padding: 12px 16px;
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-.sidebar .nav-link:hover {
+.sidebar li a {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: #333;
+  text-decoration: none;
+}
+.sidebar li a:hover {
   background: #e9ecef;
   color: #4a90e2;
 }
-.sidebar .sidebar-header {
-  background: #fff;
-}
 
-/* Console Header */
-.console-header {
+/* Header */
+.header {
   position: fixed;
   top: 0;
   left: 220px;
   right: 0;
-  height: 48px;
-  background: #2d2d2d;
-  color: #eee;
-  z-index: 1031;
+  height: 60px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #ddd;
   display: flex;
   align-items: center;
-}
-
-/* Main Content */
-.main-content {
-  margin-top: 48px;
-  margin-left: 220px;
-  padding: 1rem;
+  padding: 0 1rem;
+  z-index: 900;
 }
 
 /* Footer */
@@ -52,45 +57,20 @@
   background: #f8f9fa;
   border-top: 1px solid #ddd;
   padding: 0.75rem 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  z-index: 900;
 }
 
-/* Sidebar Toggle Button */
-.sidebar-toggle-btn {
-  display: none;
+/* Main content area */
+.main-content {
+  margin-left: 220px;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  padding: 1rem;
+  overflow-y: auto;
+  min-height: calc(100vh - 120px); /* header + footer */
 }
 
-/* Mobile Styles */
-@media (max-width: 767px) {
-  .sidebar {
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-  }
-  .sidebar.active {
-    transform: translateX(0);
-  }
-  .console-header {
-    left: 0;
-  }
-  .main-content {
-    margin-left: 0;
-  }
-  .footer {
-    left: 0;
-  }
-  .sidebar-toggle-btn {
-    display: block;
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 1100;
-    background: #4a90e2;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
+/* Ensure body height */
+html, body {
+  height: 100%;
 }

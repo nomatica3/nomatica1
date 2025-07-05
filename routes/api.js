@@ -89,3 +89,5 @@ app.get('/new-chat', (req, res) => {
 app.get('/search-chats', (req, res) => {
   res.render('search-chats');
 });
+
+app.use(express.static(path.join(__dirname, 'public')));

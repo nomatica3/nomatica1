@@ -4,69 +4,62 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title><%= title %></title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="/styles.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="/styles.css" />
+  <!-- Optional Bootstrap for form styling -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
-  <!-- Sidebar toggle button -->
-  <button id="sidebarToggle" class="sidebar-toggle-btn">☰ Menu</button>
-
   <!-- Sidebar -->
-  <nav class="sidebar" id="sidebarMenu">
-    <div class="sidebar-header d-flex justify-content-between align-items-center px-3 py-2 border-bottom">
-      <div class="dropdown w-100">
-        <button
-          class="btn btn-light w-100 d-flex justify-content-between align-items-center"
-          type="button"
-          id="companyDropdown"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Colorful Moves
-          <span class="caret">▼</span>
-        </button>
-        <ul class="dropdown-menu w-100" aria-labelledby="companyDropdown">
-          <li><a class="dropdown-item" href="#">Company Settings</a></li>
-          <li><a class="dropdown-item" href="#">Switch Company</a></li>
-          <li><a class="dropdown-item" href="#">Log Out</a></li>
-        </ul>
-      </div>
-    </div>
-    <ul class="nav flex-column mt-3">
-      <li><a class="nav-link" href="/">🏠 Home</a></li>
-      <li><a class="nav-link" href="/new-chat">📝 New Chat</a></li>
-      <li><a class="nav-link" href="/search-chats">🔍 Search Chats</a></li>
-      <li><a class="nav-link" href="/library">📚 Library</a></li>
-      <li><a class="nav-link" href="/images">🖼️ Images</a></li>
-      <li><a class="nav-link" href="/videos">🎥 Videos</a></li>
-      <li><a class="nav-link" href="/explore">🌐 Explore</a></li>
-      <li><a class="nav-link" href="/settings">⚙️ Settings</a></li>
-      <li><a class="nav-link" href="/help">❓ Help</a></li>
-      <li><a class="nav-link" href="/about">ℹ️ About</a></li>
+  <div class="sidebar">
+    <ul>
+      <li><a href="/new-chat">📝 New Chat</a></li>
+      <li><a href="/search-chats">🔍 Search Chats</a></li>
+      <li><a href="/library">📚 Library</a></li>
+      <li><a href="/images">🖼️ Images</a></li>
+      <li><a href="/videos">🎥 Videos</a></li>
+      <li><a href="/explore">🌐 Explore</a></li>
+      <li><a href="/">💬 CAPS Chat</a></li>
+      <li><a href="/settings">⚙️ Settings</a></li>
+      <li><a href="/help">❓ Help</a></li>
+      <li><a href="/about">ℹ️ About</a></li>
     </ul>
-  </nav>
+  </div>
 
-  <!-- Console Header -->
-  <header class="console-header d-flex align-items-center px-3">
-    <span class="text-light small">Colorful Moves Console</span>
+  <!-- Header -->
+  <header class="header bg-primary text-white py-3">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="logo">
+        <a href="/" class="text-white text-decoration-none">
+          <img src="/logo.png" alt="Colorful Moves Logo" class="logo-img" />
+        </a>
+      </div>
+      <nav class="nav">
+        <ul class="nav-list d-flex list-unstyled mb-0">
+          <li class="nav-item"><a class="nav-link text-white" href="/new-chat">📝 New Chat</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="/search-chats">🔍 Search Chats</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <!-- Main Content -->
-  <main class="main-content">
+  <main class="main-content container py-4">
+    <div class="text-center mb-4">
+      <h1><%= title %></h1>
+      <p>Welcome to the <%= title %> page. Here you can find various resources and tools to help you.</p>
+    </div>
     <%- body %>
   </main>
 
   <!-- Footer -->
   <footer class="footer">
-    <span>&copy; 2025 Colorful Moves</span>
-    <form class="d-flex">
-      <input type="text" placeholder="Ask CAPS..." class="form-control form-control-sm me-2"/>
-      <button class="btn btn-primary btn-sm">Ask</button>
-    </form>
+    <div class="container d-flex justify-content-between align-items-center flex-wrap">
+      <span>&copy; 2025 Colorful Moves. All rights reserved.</span>
+      <form class="d-flex mt-2 mt-md-0">
+        <input type="text" placeholder="Ask CAPS..." class="form-control me-2" />
+        <button class="btn btn-primary">Ask</button>
+      </form>
+    </div>
   </footer>
-
-  <script src="/script.js"></script>
 </body>
 </html>
