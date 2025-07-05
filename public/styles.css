@@ -10,7 +10,7 @@ body {
   left: 0;
   width: 220px;
   height: 100vh;
-  background: #f1f3f5; /* light gray for contrast */
+  background: #f1f3f5;
   border-right: 1px solid #ddd;
   padding-top: 1rem;
   overflow-y: auto;
@@ -26,25 +26,33 @@ body {
   color: #4a90e2;
 }
 
-/* Header and Footer with inset */
-.main-header,
-.simple-footer {
-  margin-left: 220px; /* 4 tabs inset */
-  background: #f8f9fa; /* off white */
-  padding: 0.75rem 1rem;
+/* Header fixed top */
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 220px; /* align after sidebar */
+  right: 0;
+  height: 60px;
+  background: #f8f9fa;
   border-bottom: 1px solid #ddd;
-}
-.simple-footer {
-  border-top: 1px solid #ddd;
-  border-bottom: none;
-  box-shadow: 0 -2px 4px rgba(0,0,0,0.05);
-}
-.main-content {
-  margin-left: 220px; /* Align with header/footer */
-  padding: 1rem;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  z-index: 1020;
 }
 
-/* Footer form adjustments */
+/* Footer fixed bottom */
+.simple-footer {
+  position: fixed;
+  bottom: 0;
+  left: 220px;
+  right: 0;
+  background: #f8f9fa;
+  border-top: 1px solid #ddd;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.05);
+  z-index: 1020;
+}
 .simple-footer .footer-content {
   display: flex;
   justify-content: space-between;
@@ -56,7 +64,13 @@ body {
   width: 100%;
 }
 
-/* Mobile responsiveness */
+/* Main content with padding to avoid overlapping header/footer */
+.main-content {
+  margin-left: 220px;
+  padding: 80px 1rem 80px 1rem; /* top and bottom spacing */
+}
+
+/* Mobile adjustments */
 @media (max-width: 767px) {
   .sidebar-menu {
     transform: translateX(-100%);
@@ -70,17 +84,10 @@ body {
   .main-content {
     margin-left: 0;
   }
-  .sidebar-toggle-btn {
-    display: block;
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    background: #4a90e2;
-    color: #fff;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    z-index: 1100;
+  .main-header {
+    left: 0;
+  }
+  .simple-footer {
+    left: 0;
   }
 }
