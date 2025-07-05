@@ -1,57 +1,62 @@
-/* Animation example */
-@keyframes colorful-move {
-  0% {
-    background: linear-gradient(135deg, #ff6f61, #6ec6ff);
-    transform: translateX(0) scale(1) rotate(0deg);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-  }
-  100% {
-    background: linear-gradient(135deg, #ff6f61, #6ec6ff);
-    transform: translateX(0) scale(1) rotate(0deg);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-  }
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
 }
 
-.colorful-move {
-  display: inline-block;
-  padding: 1rem 2rem;
-  color: #fff;
-  font-weight: bold;
-  border-radius: 1.5rem;
-  animation: colorful-move 2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  cursor: pointer;
-}
-
-/* Sidebar styles */
+/* Sidebar */
 .sidebar-menu {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
   width: 220px;
-  background: #f8f9fa;
+  height: 100vh;
+  background: #f1f3f5; /* light gray for contrast */
   border-right: 1px solid #ddd;
-  padding-top: 60px;
+  padding-top: 1rem;
   overflow-y: auto;
   z-index: 1030;
 }
-
 .sidebar-menu .nav-link {
-  color: #181a1b;
-  padding: 12px 16px;
+  color: #333;
+  padding: 0.75rem 1rem;
   display: block;
 }
-
 .sidebar-menu .nav-link:hover {
   background: #e9ecef;
   color: #4a90e2;
 }
 
-.sidebar-toggle-btn {
-  display: none;
+/* Header and Footer with inset */
+.main-header,
+.simple-footer {
+  margin-left: 220px; /* 4 tabs inset */
+  background: #f8f9fa; /* off white */
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #ddd;
+}
+.simple-footer {
+  border-top: 1px solid #ddd;
+  border-bottom: none;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.05);
+}
+.main-content {
+  margin-left: 220px; /* Align with header/footer */
+  padding: 1rem;
 }
 
-/* Mobile toggle */
+/* Footer form adjustments */
+.simple-footer .footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.simple-footer form {
+  max-width: 400px;
+  width: 100%;
+}
+
+/* Mobile responsiveness */
 @media (max-width: 767px) {
   .sidebar-menu {
     transform: translateX(-100%);
@@ -60,24 +65,22 @@
   .sidebar-menu.active {
     transform: translateX(0);
   }
+  .main-header,
+  .simple-footer,
+  .main-content {
+    margin-left: 0;
+  }
   .sidebar-toggle-btn {
     display: block;
     position: fixed;
     top: 10px;
     left: 10px;
     background: #4a90e2;
-    color: white;
+    color: #fff;
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 4px;
-    font-size: 1rem;
+    cursor: pointer;
     z-index: 1100;
-  }
-}
-
-/* For desktop: push content right */
-@media (min-width: 768px) {
-  body {
-    margin-left: 220px;
   }
 }
