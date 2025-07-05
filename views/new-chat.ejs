@@ -1,6 +1,9 @@
 <%- include('partials/header', { title: 'Home' }) %>
 <%- include('partials/navbar') %>
 <%- include('partials/sidebar') %>
+app.get('/new-chat', (req, res) => {
+  res.render('new-chat');
+});
 
 <div class="container py-4 text-center">
   <h1>New chat</h1>
