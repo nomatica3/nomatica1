@@ -146,11 +146,39 @@ document.getElementById('chat-form').addEventListener('submit', (e) => {
 
   input.value = "";
 
-  // Here you can add logic to send to server/OpenAI and append AI reply
+  // Fetch AI response from OpenAI backend
   const aiMsg = document.createElement('div');
-  aiMsg.textContent = "AI: I'm here to help!";
+  aiMsg.textContent = "AI: ...";
   messagesDiv.appendChild(aiMsg);
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+  fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      // Replace 'YOUR_OPENAI_API_KEY' with your actual OpenAI API key
+      'Authorization': 'Bearer YOUR_OPENAI_API_KEY'
+    },
+    body: JSON.stringify({
+      model: 'gpt-3.5-turbo',
+      messages: [
+        { role: 'system', content: 'You are a helpful assistant.' },
+        { role: 'user', content: message }
+      ]
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      const aiResponse = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content
+        ? data.choices[0].message.content.trim()
+        : (data.error && data.error.message) || "Sorry, no response.";
+      aiMsg.textContent = "AI: " + aiResponse;
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    })
+    .catch(() => {
+      aiMsg.textContent = "AI: Sorry, there was a problem contacting the AI.";
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    });
 });
 // ========== END CHAT AI ASSISTANT ==========
 }

@@ -11,6 +11,24 @@
     <div id="chatResponse" class="mt-3"></div>
   </div>
 </div>
+<script>
+async function sendToCAPS() {
+  const userMessage = document.getElementById('userMessage').value;
+  if (!userMessage.trim()) return;
+  document.getElementById('chatResponse').innerText = 'Thinking...';
+  try {
+    const res = await fetch('/api/openai', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: userMessage })
+    });
+    const data = await res.json();
+    document.getElementById('chatResponse').innerText = data.response || 'No response.';
+  } catch (err) {
+    document.getElementById('chatResponse').innerText = 'Error contacting AI.';
+  }
+}
+</script>
 
 <script src="/script.js"></script>
 <%- include('partials/footer') %>

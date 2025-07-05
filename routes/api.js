@@ -19,65 +19,73 @@ const app = express();
 const path = require('path');
 
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Example routes
-app.get('/new-chat', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'new-chat.html'));
-});
-
-app.get('/search-chats', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'search-chats.html'));
-});
-
-// Repeat for all the other pages:
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+// Repeat for all the other pages, rendering EJS templates from views:
 app.get('/library', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'library.html'));
+  res.render('library');
 });
 
 app.get('/images', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'images.html'));
+  res.render('images');
 });
 
 app.get('/videos', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'videos.html'));
+  res.render('videos');
 });
 
 app.get('/explore', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'explore.html'));
+  res.render('explore');
 });
 
 app.get('/settings', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'settings.html'));
+  res.render('settings');
 });
 
 app.get('/help', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'help.html'));
+  res.render('help');
 });
 
 app.get('/about', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'about.html'));
+  res.render('about');
 });
+
 app.get('/privacy', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'privacy.html'));
+  res.render('privacy');
 });
+
 app.get('/terms', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'terms.html'));
+  res.render('terms');
 });
+
 app.get('/contact', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'contact.html'));
-}); 
+  res.render('contact');
+});
+
 app.get('/feedback', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'feedback.html'));
+  res.render('feedback');
 });
+
 app.get('/notifications', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'notifications.html'));
+  res.render('notifications');
 });
+
 app.get('/profile', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'profile.html'));
+  res.render('profile');
 });
+
 app.get('/account', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'account.html'));
+  res.render('account');
 });
+
 app.get('/logout', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'logout.html'));
-}); 
+  res.render('logout');
+});
+
+app.get('/new-chat', (req, res) => {
+  res.render('new-chat');
+});
+
+app.get('/search-chats', (req, res) => {
+  res.render('search-chats');
+});
