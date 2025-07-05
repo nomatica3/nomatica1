@@ -43,6 +43,29 @@ app.get('/library', (req, res) => res.render('library'));
 app.get('/images', (req, res) => res.render('images'));
 app.get('/videos', (req, res) => res.render('videos'));
 app.get('/explore', (req, res) => res.render('explore'));
+app.get('/new-chat', (req, res) => {
+  res.render('new-chat');
+});
+
+app.get('/search-chats', (req, res) => {
+  res.render('search-chats');
+});
+
+app.get('/library', (req, res) => {
+  res.render('library');
+});
+
+app.get('/images', (req, res) => {
+  res.render('images');
+});
+
+app.get('/videos', (req, res) => {
+  res.render('videos');
+});
+
+app.get('/explore', (req, res) => {
+  res.render('explore');
+});
 
 // OpenAI API proxy route
 app.post("/api/ai-chat", async (req, res) => {
