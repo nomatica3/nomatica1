@@ -1,7 +1,9 @@
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  height: 100%;
   font-family: system-ui, sans-serif;
-  display: flex;
+  background: #f9fafb;
 }
 
 /* Sidebar */
@@ -12,21 +14,22 @@ body {
   width: 220px;
   height: 100vh;
   background: #f1f3f5;
-  padding-top: 1rem;
   border-right: 1px solid #ddd;
+  padding-top: 1rem;
   overflow-y: auto;
   z-index: 1000;
 }
 .sidebar ul {
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 .sidebar li a {
   display: block;
   padding: 0.75rem 1rem;
   color: #333;
   text-decoration: none;
+  transition: background 0.2s, color 0.2s;
 }
 .sidebar li a:hover {
   background: #e9ecef;
@@ -54,23 +57,31 @@ body {
   bottom: 0;
   left: 220px;
   right: 0;
+  height: 50px;
   background: #f8f9fa;
   border-top: 1px solid #ddd;
-  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  font-size: 0.9rem;
   z-index: 900;
 }
 
-/* Main content area */
+/* Main content */
 .main-content {
   margin-left: 220px;
   margin-top: 60px;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
   padding: 1rem;
+  min-height: calc(100vh - 110px); /* header + footer */
   overflow-y: auto;
-  min-height: calc(100vh - 120px); /* header + footer */
+  box-sizing: border-box;
 }
 
-/* Ensure body height */
-html, body {
-  height: 100%;
+/* Optional: active link styling */
+.sidebar li a.active {
+  background: #e9ecef;
+  color: #4a90e2;
+  font-weight: 500;
 }
