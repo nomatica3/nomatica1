@@ -1,8 +1,8 @@
-<%- include('partials/header', { title: 'Admin Portal' }) %>
-<%- include('partials/sidebar') %>
+<% layout('layout') %>
 
 <div class="container py-4 text-center">
   <h1>Admin Portal</h1>
+
   <div class="workspace-card mb-3">
     <h4>CRM Monitoring</h4>
     <p>Overview of customer interactions.</p>
@@ -11,14 +11,16 @@
       <button type="submit" class="btn btn-secondary">CRM Actions</button>
     </form>
   </div>
+
   <div class="workspace-card mb-3">
     <h4>Supply Updates</h4>
     <p>Supply chain and stock status.</p>
     <button class="btn btn-primary" onclick="window.location.href='/supply'">Go to Supply</button>
-    <form action="/supply" method="post" class="mt-3">  
+    <form action="/supply" method="post" class="mt-3">
       <button type="submit" class="btn btn-secondary">Supply Actions</button>
     </form>
   </div>
+
   <div class="workspace-card mb-3">
     <h4>Profit & Loss</h4>
     <p>P&L summary reports.</p>
@@ -27,13 +29,13 @@
       <button type="submit" class="btn btn-secondary">P&L Actions</button>
     </form>
   </div>
+
   <div class="workspace-card mb-3">
     <h4>Human Resources</h4>
     <p>Subcontractor onboarding and HR tasks.</p>
     <button class="btn btn-primary" onclick="window.location.href='/hr'">Go to HR</button>
     <form action="/hr" method="post" class="mt-3">
-      <button type="submit" class="btn btn-secondary">HR Actions</button
+      <button type="submit" class="btn btn-secondary">HR Actions</button>
+    </form>
   </div>
 </div>
-<script src="/script.js"></script>
-<%- include('partials/footer') %>

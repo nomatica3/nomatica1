@@ -1,54 +1,46 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: system-ui, sans-serif;
-  background: #f9fafb;
-}
-
 /* Sidebar */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
-  width: 220px;
   height: 100vh;
-  background: #f1f3f5;
+  width: 220px;
+  background: #f8f9fa;
   border-right: 1px solid #ddd;
-  padding-top: 1rem;
   overflow-y: auto;
-  z-index: 1000;
+  z-index: 1030;
 }
-.sidebar ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.sidebar .nav-link {
+  color: #181a1b;
+  padding: 12px 16px;
 }
-.sidebar li a {
-  display: block;
-  padding: 0.75rem 1rem;
-  color: #333;
-  text-decoration: none;
-  transition: background 0.2s, color 0.2s;
-}
-.sidebar li a:hover {
+.sidebar .nav-link:hover {
   background: #e9ecef;
   color: #4a90e2;
 }
+.sidebar .sidebar-header {
+  background: #fff;
+}
 
-/* Header */
-.header {
+/* Console Header */
+.console-header {
   position: fixed;
   top: 0;
   left: 220px;
   right: 0;
-  height: 60px;
-  background: #f8f9fa;
-  border-bottom: 1px solid #ddd;
+  height: 48px;
+  background: #2d2d2d;
+  color: #eee;
+  z-index: 1031;
   display: flex;
   align-items: center;
-  padding: 0 1rem;
-  z-index: 900;
+}
+
+/* Main Content */
+.main-content {
+  margin-top: 48px;
+  margin-left: 220px;
+  padding: 1rem;
 }
 
 /* Footer */
@@ -57,31 +49,48 @@ html, body {
   bottom: 0;
   left: 220px;
   right: 0;
-  height: 50px;
   background: #f8f9fa;
   border-top: 1px solid #ddd;
+  padding: 0.75rem 1rem;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 0 1rem;
-  font-size: 0.9rem;
-  z-index: 900;
+  align-items: center;
 }
 
-/* Main content */
-.main-content {
-  margin-left: 220px;
-  margin-top: 60px;
-  margin-bottom: 50px;
-  padding: 1rem;
-  min-height: calc(100vh - 110px); /* header + footer */
-  overflow-y: auto;
-  box-sizing: border-box;
+/* Sidebar Toggle Button */
+.sidebar-toggle-btn {
+  display: none;
 }
 
-/* Optional: active link styling */
-.sidebar li a.active {
-  background: #e9ecef;
-  color: #4a90e2;
-  font-weight: 500;
+/* Mobile Styles */
+@media (max-width: 767px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  .sidebar.active {
+    transform: translateX(0);
+  }
+  .console-header {
+    left: 0;
+  }
+  .main-content {
+    margin-left: 0;
+  }
+  .footer {
+    left: 0;
+  }
+  .sidebar-toggle-btn {
+    display: block;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1100;
+    background: #4a90e2;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
 }

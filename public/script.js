@@ -230,3 +230,6 @@ app.set('views', path.join(__dirname, 'views'));
     }
   });
 </script>
+document.getElementById('sidebarToggle').addEventListener('click', function() {
+  document.getElementById('sidebarMenu').classList.toggle('active');
+});
