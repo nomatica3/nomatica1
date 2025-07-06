@@ -91,3 +91,27 @@ app.get('/search-chats', (req, res) => {
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.post('/api/openai', async (req, res) => {
+  try {
+    const prompt = req.body.message;
+    if (!prompt) {
+      return res.status(400).json({ error: 'No prompt provided' });
+    }
+
+    const completion = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',  // or 'gpt-4' if you have access
+      messages: [
+        { role: 'system', content: 'You are a helpful assistant.' },
+        { role: 'user', content: prompt }
+      ],
+      max_tokens: 500,
+    });
+
+    const aiResponse = completion.data.choices[0].message.content;
+    res.json({ response: aiResponse });
+  } catch (error) {
+    console.error("OpenAI error:", error.response ? error.response.data : error.message);
+    res.status(500).json({ error: 'Failed to get response from OpenAI' });
+  }
+});
+

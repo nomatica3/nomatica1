@@ -1,11 +1,18 @@
 // app.js
+require('dotenv').config();
 const express = require("express");
 const path = require("path");
+const { Configuration, OpenAIApi } = require("openai");
 const dotenv = require("dotenv");
 const app = express();
 
-dotenv.config();
 
+const { Configuration, OpenAIApi } = require("openai");
+
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
 // EJS setup
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -33,11 +40,32 @@ app.get("/help", (req, res) => res.render("help", { title: "Help" }));
 app.get("/about", (req, res) => res.render("about", { title: "About" }));
 
 // AI Chat endpoint
-app.post("/api/ai-chat", async (req, res) => {
-  const userPrompt = req.body.prompt;
-  if (!userPrompt) {
-    return res.status(400).json({ error: "Prompt required" });
+app.post('/api/openai', async (req, res) => {
+  try {
+    const prompt = req.body.message;
+    if (!prompt) {
+      return res.status(400).json({ error: 'No prompt provided' });
+    }
+
+    const completion = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages: [
+        { role: 'system', content: 'You are a helpful assistant.' },
+        { role: 'user', content: prompt }
+      ],
+      max_tokens: 500,
+    });
+        const aiResponse = completion.data.choices[0].message.content;
+    res.json({ response: aiResponse });
+  } catch (error) {
+    console.error("OpenAI error:", error.response ? error.response.data : error.message);
+    res.status(500).json({ error: 'Failed to get response from OpenAI' });
   }
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
   // Simulated response
   const aiMessage = `AI Response to: ${userPrompt}`;
   res.json({ response: aiMessage });
@@ -49,5 +77,31 @@ app.use((err, req, res, next) => {
   res.status(500).send("Something broke!");
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+app.post('/api/openai', async (req, res) => {
+  try {
+    const prompt = req.body.message;
+    if (!prompt) {
+      return res.status(400).json({ error: 'No prompt provided' });
+    }
+
+    const completion = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',  // or 'gpt-4' if you have access
+      messages: [
+        { role: 'system', content: 'You are a helpful assistant.' },
+        { role: 'user', content: prompt }
+      ],
+      max_tokens: 500,
+    });
+
+    const aiResponse = completion.data.choices[0].message.content;
+    res.json({ response: aiResponse });
+  } catch (error) {
+    console.error("OpenAI error:", error.response ? error.response.data : error.message);
+    res.status(500).json({ error: 'Failed to get response from OpenAI' });
+  }
+});
+
+
