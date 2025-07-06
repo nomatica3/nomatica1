@@ -30,13 +30,28 @@ let items = [
 
 // Home route - list items
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Home' });
-});
-
+  res.render('index', { title: 'Home', items });
 });
 
 // Show form to add new item
 app.get('/add', (req, res) => {
+  res.locals.title = 'Add New Item';    
+  res.render('add');
+});
+
+
+// Show form to add new item
+app.get('/add', (req, res) => {
+  // Render the add item form
+  if (!req.isAuthenticated()) {
+    return res.redirect('/login');
+  }
+  // Check if user is authenticated before showing the form
+  if (!req.isAuthenticated()) {
+    return res.redirect('/login');
+  }
+  // Render the add item form
+  res.locals.title = 'Add New Item';    
   res.render('add');
 });
 
