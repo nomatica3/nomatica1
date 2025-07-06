@@ -1,7 +1,14 @@
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   margin: 0;
   font-family: system-ui, sans-serif;
-  display: flex;
+}
+
+.container {
+  text-align: center;
 }
 
 /* Sidebar */
