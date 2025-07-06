@@ -1,7 +1,8 @@
-const path = require('path');
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const expressLayouts = require('express-ejs-layouts');
+const { Configuration, OpenAIApi } = require('openai');
+
 
 
 
@@ -109,4 +110,6 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
+
+console.log("OpenAI Key:", process.env.OPENAI_API_KEY);
 
