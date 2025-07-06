@@ -1,28 +1,21 @@
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+html, body {
+  height: 100%;
   margin: 0;
   font-family: system-ui, sans-serif;
 }
 
-.container {
-  text-align: center;
-}
-
-/* Sidebar */
+/* Sidebar BELOW header */
 .sidebar {
   position: fixed;
-  top: 0;
+  top: 60px; /* header height */
   left: 0;
   width: 220px;
-  height: 100vh;
+  bottom: 0;
   background: #f1f3f5;
   padding-top: 1rem;
   border-right: 1px solid #ddd;
   overflow-y: auto;
-  z-index: 1000;
+  z-index: 900;
 }
 .sidebar ul {
   list-style: none;
@@ -40,48 +33,43 @@ body {
   color: #4a90e2;
 }
 
-/* Header */
+/* Header fixed at the top */
 .header {
   position: fixed;
   top: 0;
-  left: 220px;
+  left: 0;
   right: 0;
   height: 60px;
-  background: #f8f9fa;
-  border-bottom: 1px solid #ddd;
+  background: #007bff;
+  color: #fff;
   display: flex;
   align-items: center;
   padding: 0 1rem;
-  z-index: 900;
+  z-index: 1000;
 }
 
-/* Footer */
+/* Footer fixed at bottom, centered */
 .footer {
   position: fixed;
   bottom: 0;
-  left: 220px;
+  left: 0;
   right: 0;
   background: #f8f9fa;
   border-top: 1px solid #ddd;
-  padding: 0.75rem 1rem;
-  z-index: 900;
+  padding: 0.75rem;
+  text-align: center;
+  z-index: 1000;
 }
 
-/* Main content area */
+/* Main content */
 .main-content {
-  margin-left: 220px;
-  margin-top: 60px;
-  margin-bottom: 60px;
+  margin-top: 60px; /* header height */
+  margin-left: 220px; /* sidebar width */
+  margin-bottom: 60px; /* footer height */
   padding: 1rem;
-  overflow-y: auto;
   min-height: calc(100vh - 120px); /* header + footer */
-}
-
-/* Ensure body height */
-html, body {
-  height: 100%;
-}
-.main-content {
-  margin-left: 220px; /* Match sidebar width */
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
