@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   mover.style.zIndex = 9999;
   mover.style.boxShadow = '0 0 30px 10px rgba(0,0,0,0.2)';
   document.body.appendChild(mover);
+  console.log('script.js loaded');
+
 
   function randomGradient() {
     const stops = Array.from({length: 3 + Math.floor(Math.random() * 3)}, () =>
@@ -50,4 +52,18 @@ document.addEventListener('DOMContentLoaded', () => {
         : '☰ Toggle Sidebar';
     });
   }
+  document.querySelector("#send-button").addEventListener("click", async () => {
+  const input = document.querySelector("#message-input").value;
+
+  const response = await fetch("/api/openai", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ message: input })
+  });
+
+  const data = await response.json();
+  document.querySelector("#response").textContent = data.response;
+});
 });

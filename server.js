@@ -49,7 +49,7 @@ app.post('/api/openai', async (req, res) => {
     }
 
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o', // or 'gpt-4o-mini', 'gpt-3.5-turbo'
+      model: 'gpt-4o',
       messages: [
         { role: 'system', content: 'You are a helpful assistant.' },
         { role: 'user', content: prompt }
@@ -64,6 +64,7 @@ app.post('/api/openai', async (req, res) => {
     res.status(500).json({ error: 'Failed to contact AI' });
   }
 });
+
 
 
 // 404 fallback
