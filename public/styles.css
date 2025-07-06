@@ -81,3 +81,7 @@ body {
 html, body {
   height: 100%;
 }
+.main-content {
+  margin-left: 220px; /* Match sidebar width */
+  padding: 20px;
+}
