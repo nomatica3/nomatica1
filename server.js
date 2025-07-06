@@ -1,10 +1,13 @@
 require('dotenv').config();
+console.log("OPENAI_API_KEY:", process.env.OPENAI_API_KEY);
+console.log("OPENAI_API_BASE_URL:", process.env.OPENAI_API_BASE_URL);
+console.log("MONGODB_URI:", process.env.MONGODB_URI);
 
 const express = require('express');
 const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
 
-const { OpenAI } = require("openai");
+const { OpenAI } = require('openai');
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
@@ -42,7 +45,7 @@ app.post('/api/ai-chat', async (req, res) => {
   const { prompt } = req.body;
   if (!prompt) return res.status(400).json({ error: "Prompt required" });
 
-  console.log("Received prompt:", prompt);
+  console.log("AI Chat Prompt:", prompt);
 
   try {
     const completion = await openai.chat.completions.create({
@@ -55,9 +58,9 @@ app.post('/api/ai-chat', async (req, res) => {
 
     const aiResponse = completion.choices[0].message.content.trim();
     res.json({ response: aiResponse });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "AI request failed" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ response: "Error contacting OpenAI." });
   }
 });
 
@@ -76,3 +79,8 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log("OpenAI Key starts with:", process.env.OPENAI_API_KEY?.slice(0, 8));
 });
+// Export app for testing
+module.exports = app; // This allows us to run tests against the server
+// Note: Ensure you have a .env file with the required variables set up
+// Example .env file content:
+// OPENAI_API_KEY=your_openai_api_key
