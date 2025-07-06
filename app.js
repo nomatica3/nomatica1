@@ -16,9 +16,9 @@ const app = express();
 
 // EJS view engine
 app.set('layout', 'layout'); // layout.ejs in your views folder
-dotenv.config();  
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+dotenv.config(); 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views')); 
 
 // Serve static files (CSS, JS, images)
 app.use(express.static(path.join(__dirname, "public")));
@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Main routes
-app.get("/", (req, res) => res.render("home"));
+app.get("/", (req, res) => res.render("index"));
 app.get("/find-contracts", (req, res) => res.render("find-contracts"));
 app.get("/submit-proposal", (req, res) => res.render("submit-proposal"));
 app.get("/local-subcontractors", (req, res) => res.render("local-subcontractors"));
