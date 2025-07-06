@@ -14,8 +14,8 @@ const openai = new OpenAI({
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
 app.use(expressLayouts);
-const indexRoutes = require('./routes/index');
-app.use("/", indexRoutes);
+//const indexRoutes = require('./routes/index');
+//app.use("/", indexRoutes);
 
 
 // EJS setup
