@@ -1,10 +1,15 @@
 // server.js
-require('dotenv').config();
-const express = require('express');
-const path = require('path');
+require("dotenv").config();
+const express = require("express");
+const path = require("path");
+
+// ✅ This line fixes the ReferenceError
+const OpenAI = require("openai");
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
+
 
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
