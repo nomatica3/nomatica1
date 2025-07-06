@@ -1,115 +1,78 @@
 require('dotenv').config();
+
 const express = require('express');
+const path = require('path');
+const expressLayouts = require('express-ejs-layouts');
+
+const { OpenAI } = require("openai");
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
+
 const app = express();
-const { Configuration, OpenAIApi } = require('openai');
 
-
-
-
-app.set('view engine', 'ejs');
-app.use(expressLayouts);
-
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Middleware
+// View engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+app.use(expressLayouts);
+
+// Static files
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/find-contracts', (req, res) => res.render('find-contracts'));
-app.get('/submit-proposal', (req, res) => res.render('submit-proposal'));
-app.get('/local-subcontractors', (req, res) => res.render('local-subcontractors'));
-app.get('/vendor-portal', (req, res) => res.render('vendor-portal'));
-app.get('/admin-portal', (req, res) => res.render('admin-portal'));
-
-// In-memory data store (for demo purposes)
-let items = [
-  { id: 1, name: 'Item One', description: 'First item description' },
-  { id: 2, name: 'Item Two', description: 'Second item description' }
-];
-
-// Home route - list items
+// Home route
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Home', items });
+  res.render('index', { title: 'Home' });
 });
 
-// Show form to add new item
-app.get('/add', (req, res) => {
-  res.locals.title = 'Add New Item';    
-  res.render('add');
-});
-
-
-// Show form to add new item
-app.get('/add', (req, res) => {
-  // Render the add item form
-  if (!req.isAuthenticated()) {
-    return res.redirect('/login');
-  }
-  // Check if user is authenticated before showing the form
-  if (!req.isAuthenticated()) {
-    return res.redirect('/login');
-  }
-  // Render the add item form
-  res.locals.title = 'Add New Item';    
-  res.render('add');
-});
-
-// Handle new item submission
-app.post('/add', (req, res) => {
-  const { name, description } = req.body;
-  const newItem = {
-    id: items.length + 1,
-    name,
-    description
-  };
-  items.push(newItem);
-  res.redirect('/');
-});
-
-// Show item details
-app.get('/item/:id', (req, res) => {
-  const item = items.find(i => i.id === parseInt(req.params.id));
-  if (!item) return res.status(404).send('Item not found');
-  res.render('item', { item });
-});
-
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-// Show contact form
-app.get('/contact', (req, res) => {
-  res.render('contact');
-});
-
-// Handle contact form submission
+// Contact form
+app.get('/contact', (req, res) => res.render('contact'));
 app.post('/contact', (req, res) => {
   const { name, email, message } = req.body;
-  console.log('Contact Form:', { name, email, message });
-  // You could save to a database or email here
+  console.log('Contact form:', { name, email, message });
   res.render('contact', { success: true, name });
 });
-// Show AI chat interface
-app.get('/ai-chat', (req, res) => { 
-  res.render('ai-chat');
-});
-app.use(express.static(path.join(__dirname, 'public')));
-// Handle AI chat requests
+
+// AI Chat page
+app.get('/ai-chat', (req, res) => res.render('ai-chat'));
+
+// Actual AI endpoint
 app.post('/api/ai-chat', async (req, res) => {
   const { prompt } = req.body;
-  console.log('AI Chat Prompt:', prompt);
-  
-  // Simulate AI response (replace with actual AI service call)
-  const aiResponse = `AI Response to: ${prompt}`;
-  
-  res.json({ response: aiResponse });
+  if (!prompt) return res.status(400).json({ error: "Prompt required" });
+
+  console.log("Received prompt:", prompt);
+
+  try {
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini", // Or "gpt-3.5-turbo"
+      messages: [
+        { role: "system", content: "You are a helpful assistant." },
+        { role: "user", content: prompt }
+      ]
+    });
+
+    const aiResponse = completion.choices[0].message.content.trim();
+    res.json({ response: aiResponse });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "AI request failed" });
+  }
 });
+
+// 404 fallback
+app.use((req, res) => res.status(404).send("Page not found."));
+
+// Error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send('Something broke!');
+  res.status(500).send("Something broke!");
 });
 
-console.log("OpenAI Key:", process.env.OPENAI_API_KEY);
-
+// Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log("OpenAI Key starts with:", process.env.OPENAI_API_KEY?.slice(0, 8));
+});
