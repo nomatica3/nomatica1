@@ -1,9 +1,22 @@
 // app.js
 const express = require("express");
+const expressLayouts = require("express-ejs-layouts");
+const bodyParser = require("body-parser");
+const ejs = require("ejs");
+const expressSession = require("express-session");
+const cookieParser = require("cookie-parser");
+const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 const path = require("path");
 const app = express();
 
+
 // EJS view engine
+app.set('layout', 'layout'); // layout.ejs in your views folder
+dotenv.config();  
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 

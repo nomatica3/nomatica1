@@ -1,8 +1,11 @@
 
-
 const express = require('express');
-const path = require('path');
 const app = express();
+const expressLayouts = require('express-ejs-layouts');
+
+app.set('view engine', 'ejs');
+app.use(expressLayouts);
+
 
 // Middleware
 app.set('view engine', 'ejs');
@@ -82,3 +85,4 @@ app.post('/api/ai-chat', async (req, res) => {
   
   res.json({ response: aiResponse });
 });
+
