@@ -30,7 +30,9 @@ let items = [
 
 // Home route - list items
 app.get('/', (req, res) => {
-  res.render('index', { items });
+  res.render('index', { title: 'Home' });
+});
+
 });
 
 // Show form to add new item
@@ -57,7 +59,7 @@ app.get('/item/:id', (req, res) => {
   res.render('item', { item });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
@@ -87,5 +89,9 @@ app.post('/api/ai-chat', async (req, res) => {
   const aiResponse = `AI Response to: ${prompt}`;
   
   res.json({ response: aiResponse });
+});
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
 });
 
