@@ -3,16 +3,13 @@ require('dotenv').config();
 const express = require("express");
 const path = require("path");
 const { Configuration, OpenAIApi } = require("openai");
-const dotenv = require("dotenv");
+
 const app = express();
-
-
-const { Configuration, OpenAIApi } = require("openai");
-
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
+
 // EJS setup
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -55,46 +52,6 @@ app.post('/api/openai', async (req, res) => {
       ],
       max_tokens: 500,
     });
-        const aiResponse = completion.data.choices[0].message.content;
-    res.json({ response: aiResponse });
-  } catch (error) {
-    console.error("OpenAI error:", error.response ? error.response.data : error.message);
-    res.status(500).json({ error: 'Failed to get response from OpenAI' });
-  }
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-  // Simulated response
-  const aiMessage = `AI Response to: ${userPrompt}`;
-  res.json({ response: aiMessage });
-});
-
-// Error handler
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send("Something broke!");
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-app.post('/api/openai', async (req, res) => {
-  try {
-    const prompt = req.body.message;
-    if (!prompt) {
-      return res.status(400).json({ error: 'No prompt provided' });
-    }
-
-    const completion = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',  // or 'gpt-4' if you have access
-      messages: [
-        { role: 'system', content: 'You are a helpful assistant.' },
-        { role: 'user', content: prompt }
-      ],
-      max_tokens: 500,
-    });
 
     const aiResponse = completion.data.choices[0].message.content;
     res.json({ response: aiResponse });
@@ -104,4 +61,12 @@ app.post('/api/openai', async (req, res) => {
   }
 });
 
+// Error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
 
+// Declare PORT at the end
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
