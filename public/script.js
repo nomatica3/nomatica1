@@ -1,31 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
   // MOVING COLORFUL DIV
-  const mover = document.createElement('div');
-  mover.style.position = 'fixed';
-  mover.style.width = '100px';
-  mover.style.height = '100px';
-  mover.style.borderRadius = '50%';
-  mover.style.background = 'linear-gradient(45deg, red, yellow, green, blue)';
-  mover.style.transition = 'all 0.7s cubic-bezier(.68,-0.55,.27,1.55)';
-  mover.style.zIndex = 9999;
-  mover.style.boxShadow = '0 0 30px 10px rgba(0,0,0,0.2)';
-  document.body.appendChild(mover);
-  console.log('script.js loaded');
+  //const mover = document.createElement('div');
+  //mover.style.position = 'fixed';
+  //mover.style.width = '100px';
+  //mover.style.height = '100px';
+  //mover.style.borderRadius = '50%';
+  //mover.style.background = 'linear-gradient(45deg, red, yellow, green, blue)';
+  //mover.style.transition = 'all 0.7s cubic-bezier(.68,-0.55,.27,1.55)';
+  //mover.style.zIndex = 9999;
+  //mover.style.boxShadow = '0 0 30px 10px rgba(0,0,0,0.2)';
+  //document.body.appendChild(mover);
+  //console.log('script.js loaded');
 
 
-  function randomGradient() {
-    const stops = Array.from({length: 3 + Math.floor(Math.random() * 3)}, () =>
-      `hsl(${Math.floor(Math.random() * 360)}, 80%, 60%)`
-    );
-    return `linear-gradient(${Math.floor(Math.random()*360)}deg, ${stops.join(', ')})`;
-  }
-mover.addEventListener('click', moveAndColor);
-  let intervalId = setInterval(moveAndColor, 1000);
+  //function randomGradient() {
+    //const stops = Array.from({length: 3 + Math.floor(Math.random() * 3)}, () =>
+      //`hsl(${Math.floor(Math.random() * 360)}, 80%, 60%)`
+    //);
+    //return `linear-gradient(${Math.floor(Math.random()*360)}deg, ${stops.join(', ')})`;
+  //}
+//mover.addEventListener('click', moveAndColor);
+  //let intervalId = setInterval(moveAndColor, 1000);
 
-  mover.addEventListener('mouseenter', () => clearInterval(intervalId));
-  mover.addEventListener('mouseleave', () => intervalId = setInterval(moveAndColor, 1000));
+  //mover.addEventListener('mouseenter', () => clearInterval(intervalId));
+  //mover.addEventListener('mouseleave', () => intervalId = setInterval(moveAndColor, 1000));
 
-  window.addEventListener('resize', moveAndColor);
+  //window.addEventListener('resize', moveAndColor);
 
   // SIDEBAR TOGGLE
   const toggleBtn = document.getElementById('sidebarToggle');
