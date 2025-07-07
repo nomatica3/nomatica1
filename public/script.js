@@ -19,22 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     );
     return `linear-gradient(${Math.floor(Math.random()*360)}deg, ${stops.join(', ')})`;
   }
-
-  function randomSize() {
-    return 60 + Math.random() * 120;
-  }
-
-  function moveAndColor() {
-    const size = randomSize();
-    mover.style.opacity = '0.1';
-    mover.style.width = `${size}px`;
-    mover.style.height = `${size}px`;
-    mover.style.left = `${Math.random() * (window.innerWidth - size)}px`;
-    mover.style.top = `${Math.random() * (window.innerHeight - size)}px`;
-    mover.style.background = randomGradient();
-  }
-
-  mover.addEventListener('click', moveAndColor);
+mover.addEventListener('click', moveAndColor);
   let intervalId = setInterval(moveAndColor, 1000);
 
   mover.addEventListener('mouseenter', () => clearInterval(intervalId));
