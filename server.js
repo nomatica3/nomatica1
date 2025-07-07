@@ -43,19 +43,22 @@ app.get("/500", (req, res) => res.status(500).render("500", { title: "Internal S
 app.post('/api/openai', async (req, res) => {
   try {
     const prompt = req.body.message;
+    console.log("Received prompt:", prompt);
 
     if (!prompt) {
       return res.status(400).json({ error: 'No prompt provided' });
     }
 
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o',
+      model: 'gpt-4o', // or 'gpt-4o-mini', 'gpt-3.5-turbo'
       messages: [
         { role: 'system', content: 'You are a helpful assistant.' },
         { role: 'user', content: prompt }
       ],
       max_tokens: 500
     });
+
+    console.log("OpenAI API raw response:", completion);
 
     const aiResponse = completion.choices[0].message.content.trim();
     res.json({ response: aiResponse });
@@ -64,6 +67,7 @@ app.post('/api/openai', async (req, res) => {
     res.status(500).json({ error: 'Failed to contact AI' });
   }
 });
+
 
 
 
