@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   mover.style.transition = 'all 0.7s cubic-bezier(.68,-0.55,.27,1.55)';
   mover.style.zIndex = 9999;
   mover.style.boxShadow = '0 0 30px 10px rgba(0,0,0,0.2)';
-  mover.style.opacity = '0.1';
   document.body.appendChild(mover);
   console.log('script.js loaded');
 
@@ -27,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function moveAndColor() {
     const size = randomSize();
+    mover.style.opacity = '0.1';
     mover.style.width = `${size}px`;
     mover.style.height = `${size}px`;
     mover.style.left = `${Math.random() * (window.innerWidth - size)}px`;
