@@ -35,7 +35,68 @@ app.get("/explore", (req, res) => res.render("explore", { title: "Explore" }));
 app.get("/settings", (req, res) => res.render("settings", { title: "Settings" }));
 app.get("/help", (req, res) => res.render("help", { title: "Help" }));
 app.get("/about", (req, res) => res.render("about", { title: "About" }));
+// Home
+app.get("/", (req, res) => res.render("index", { title: "Home" }));
 
+// About
+app.get("/about", (req, res) => res.render("about", { title: "About" }));
+
+// Admin Portal
+app.get("/admin-portal", (req, res) => res.render("admin-portal", { title: "Admin Portal" }));
+
+// New Chat
+app.get("/new-chat", (req, res) => res.render("new-chat", { title: "New Chat" }));
+
+// Find Contracts
+app.get("/find-contracts", (req, res) => res.render("find-contracts", { title: "Find Contracts" }));
+
+// Submit Proposal
+app.get("/submit-proposal", (req, res) => res.render("submit-proposal", { title: "Submit Proposal" }));
+
+// Local Subcontractors
+app.get("/local-subcontractors", (req, res) => res.render("local-subcontractors", { title: "Local Subcontractors" }));
+
+// Vendor Portal
+app.get("/vendor-portal", (req, res) => res.render("vendor-portal", { title: "Vendor Portal" }));
+
+// Library
+app.get("/library", (req, res) => res.render("library", { title: "Library" }));
+
+// Search Chats
+app.get("/search-chats", (req, res) => res.render("search-chats", { title: "Search Chats" }));
+
+// Images
+app.get("/images", (req, res) => res.render("images", { title: "Images" }));
+
+// Videos
+app.get("/videos", (req, res) => res.render("videos", { title: "Videos" }));
+
+// Explore
+app.get("/explore", (req, res) => res.render("explore", { title: "Explore" }));
+
+// Settings
+app.get("/settings", (req, res) => res.render("settings", { title: "Settings" }));
+
+// Help
+app.get("/help", (req, res) => res.render("help", { title: "Help" }));
+
+// Terms
+app.get("/terms", (req, res) => res.render("terms", { title: "Terms of Service" }));
+
+// Privacy
+app.get("/privacy", (req, res) => res.render("privacy", { title: "Privacy Policy" }));// 🚀 This code will print all routes:
+console.log("\n✅ Registered routes:");
+app._router.stack.forEach(middleware => {
+  if (middleware.route) {
+    console.log(`  ${Object.keys(middleware.route.methods).join(', ').toUpperCase()} ${middleware.route.path}`);
+  } else if (middleware.name === 'router') {
+    middleware.handle.stack.forEach(handler => {
+      if (handler.route) {
+        console.log(`  ${Object.keys(handler.route.methods).join(', ').toUpperCase()} ${handler.route.path}`);
+      }
+    });
+  }
+});
 // AI Chat endpoint
 app.post('/api/openai', async (req, res) => {
   try {
