@@ -5,7 +5,7 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "cloudflare",
-	"main": "workers/index.js",
+	"main": "workers/index.js or src/index.ts",
 	"compatibility_date": "2025-07-08",
 	"compatibility_flags": [
 		"global_fetch_strictly_public"
