@@ -36,7 +36,18 @@ app.get("/privacy", (req, res) => res.render("privacy", { title: "Privacy Policy
 app.get("/terms", (req, res) => res.render("terms", { title: "Terms of Service" }));
 app.get("/404", (req, res) => res.status(404).render("404", { title: "Page Not Found" }));
 app.get("/500", (req, res) => res.status(500).render("500", { title: "Internal Server Error" })); 
-
+app.get("/admin-portal", (req, res) => res.render("admin-portal", { title: "Admin Portal" }));
+app.get("/new-chat", (req, res) => res.render("new-chat", { title: "New Chat" }));
+app.get("/find-contracts", (req, res) => res.render("find-contracts", { title: "Find Contracts" }));
+app.get("/submit-proposal", (req, res) => res.render("submit-proposal", { title: "Submit Proposal" }));
+app.get("/local-subcontractors", (req, res) => res.render("local-subcontractors", { title: "Local Subcontractors" }));
+app.get("/vendor-portal", (req, res) => res.render("vendor-portal", { title: "Vendor Portal" }));
+app.get("/library", (req, res) => res.render("library", { title: "Library" }));
+app.get("/search-chats", (req, res) => res.render("search-chats", { title: "Search Chats" }));
+app.get("/images", (req, res) => res.render("images", { title: "Images" }));
+app.get("/videos", (req, res) => res.render("videos", { title: "Videos" }));
+app.get("/explore", (req, res) => res.render("explore", { title: "Explore" }));
+app.get("/settings", (req, res) => res.render("settings", { title: "Settings" }));
 // Add more .get() routes as needed
 
 // ✅ SINGLE AI Endpoint
