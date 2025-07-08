@@ -19,12 +19,12 @@
     }
   </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
   <!-- Header / Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
     <div class="container-fluid px-4">
-      <a class="navbar-brand fw-bold" href="/">Colorful Moves</a>
-      <button id="sidebarToggle" class="btn btn-outline-secondary me-2">☰</button>
+      <a class="navbar-brand fw-bold mx-auto" href="/">Colorful Moves</a>
+      <button id="sidebarToggle" class="btn btn-outline-secondary me-2 position-absolute start-0 ms-2">☰</button>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -65,7 +65,7 @@
   </nav>
 
   <!-- Main Content -->
-  <main class="main-content p-4 mt-5">
+  <main class="main-content p-4 mt-5 flex-fill">
     <%- body %>
   </main>
 
