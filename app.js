@@ -19,72 +19,33 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Main routes
-app.get("/", (req, res) => res.render("index", { title: "Home" }));
-app.get("/find-contracts", (req, res) => res.render("find-contracts", { title: "Find Contracts" }));
-app.get("/submit-proposal", (req, res) => res.render("submit-proposal", { title: "Submit Proposal" }));
-app.get("/local-subcontractors", (req, res) => res.render("local-subcontractors", { title: "Local Subcontractors" }));
-app.get("/vendor-portal", (req, res) => res.render("vendor-portal", { title: "Vendor Portal" }));
-app.get("/admin-portal", (req, res) => res.render("admin-portal", { title: "Admin Portal" }));
-app.get("/new-chat", (req, res) => res.render("new-chat", { title: "New Chat" }));
-app.get("/search-chats", (req, res) => res.render("search-chats", { title: "Search Chats" }));
-app.get("/library", (req, res) => res.render("library", { title: "Library" }));
-app.get("/images", (req, res) => res.render("images", { title: "Images" }));
-app.get("/videos", (req, res) => res.render("videos", { title: "Videos" }));
-app.get("/explore", (req, res) => res.render("explore", { title: "Explore" }));
-app.get("/settings", (req, res) => res.render("settings", { title: "Settings" }));
-app.get("/help", (req, res) => res.render("help", { title: "Help" }));
-app.get("/about", (req, res) => res.render("about", { title: "About" }));
-// Home
-app.get("/", (req, res) => res.render("index", { title: "Home" }));
+// Page routes
+const pages = [
+  { path: "/", view: "index", title: "Home" },
+  { path: "/about", view: "about", title: "About" },
+  { path: "/admin-portal", view: "admin-portal", title: "Admin Portal" },
+  { path: "/new-chat", view: "new-chat", title: "New Chat" },
+  { path: "/find-contracts", view: "find-contracts", title: "Find Contracts" },
+  { path: "/submit-proposal", view: "submit-proposal", title: "Submit Proposal" },
+  { path: "/local-subcontractors", view: "local-subcontractors", title: "Local Subcontractors" },
+  { path: "/vendor-portal", view: "vendor-portal", title: "Vendor Portal" },
+  { path: "/library", view: "library", title: "Library" },
+  { path: "/search-chats", view: "search-chats", title: "Search Chats" },
+  { path: "/images", view: "images", title: "Images" },
+  { path: "/videos", view: "videos", title: "Videos" },
+  { path: "/explore", view: "explore", title: "Explore" },
+  { path: "/settings", view: "settings", title: "Settings" },
+  { path: "/help", view: "help", title: "Help" },
+  { path: "/terms", view: "terms", title: "Terms of Service" },
+  { path: "/privacy", view: "privacy", title: "Privacy Policy" }
+];
 
-// About
-app.get("/about", (req, res) => res.render("about", { title: "About" }));
+// Automatically create routes
+pages.forEach(({ path, view, title }) => {
+  app.get(path, (req, res) => res.render(view, { title }));
+});
 
-// Admin Portal
-app.get("/admin-portal", (req, res) => res.render("admin-portal", { title: "Admin Portal" }));
-
-// New Chat
-app.get("/new-chat", (req, res) => res.render("new-chat", { title: "New Chat" }));
-
-// Find Contracts
-app.get("/find-contracts", (req, res) => res.render("find-contracts", { title: "Find Contracts" }));
-
-// Submit Proposal
-app.get("/submit-proposal", (req, res) => res.render("submit-proposal", { title: "Submit Proposal" }));
-
-// Local Subcontractors
-app.get("/local-subcontractors", (req, res) => res.render("local-subcontractors", { title: "Local Subcontractors" }));
-
-// Vendor Portal
-app.get("/vendor-portal", (req, res) => res.render("vendor-portal", { title: "Vendor Portal" }));
-
-// Library
-app.get("/library", (req, res) => res.render("library", { title: "Library" }));
-
-// Search Chats
-app.get("/search-chats", (req, res) => res.render("search-chats", { title: "Search Chats" }));
-
-// Images
-app.get("/images", (req, res) => res.render("images", { title: "Images" }));
-
-// Videos
-app.get("/videos", (req, res) => res.render("videos", { title: "Videos" }));
-
-// Explore
-app.get("/explore", (req, res) => res.render("explore", { title: "Explore" }));
-
-// Settings
-app.get("/settings", (req, res) => res.render("settings", { title: "Settings" }));
-
-// Help
-app.get("/help", (req, res) => res.render("help", { title: "Help" }));
-
-// Terms
-app.get("/terms", (req, res) => res.render("terms", { title: "Terms of Service" }));
-
-// Privacy
-app.get("/privacy", (req, res) => res.render("privacy", { title: "Privacy Policy" }));// 🚀 This code will print all routes:
+// 🚀 This code will print all routes:
 console.log("\n✅ Registered routes:");
 app._router.stack.forEach(middleware => {
   if (middleware.route) {
@@ -97,6 +58,7 @@ app._router.stack.forEach(middleware => {
     });
   }
 });
+
 // AI Chat endpoint
 app.post('/api/openai', async (req, res) => {
   try {
