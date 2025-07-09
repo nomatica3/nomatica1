@@ -1,7 +1,7 @@
 export default {
   async fetch(request) {
     const { pathname } = new URL(request.url);
-
+    
     // Serve random UUID for /api/uuid
     if (pathname === "/api/uuid") {
       return new Response(crypto.randomUUID(), { status: 200 });

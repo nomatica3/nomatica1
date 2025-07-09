@@ -73,3 +73,27 @@ html, body {
   align-items: center;
   justify-content: center;
 }
+/* Sidebar dark styles */
+#sidebarMenu {
+  background: #202123;
+  color: #e1e1e1;
+}
+#sidebarMenu .nav-link {
+  color: #ccc;
+  font-weight: 500;
+}
+#sidebarMenu .nav-link:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Header dark styles */
+.navbar.bg-dark {
+  background-color: #343541 !important;
+}
+
+/* Active link (optional) */
+#sidebarMenu .nav-link.active {
+  background-color: #444;
+  color: #fff;
+}
