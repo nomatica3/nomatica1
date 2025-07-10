@@ -21,13 +21,20 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
   <!-- Header / Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
-    <div class="container-fluid px-4">
-      <a class="navbar-brand fw-bold mx-auto" href="/">Colorful Moves</a>
-      <button id="sidebarToggle" class="btn btn-outline-secondary me-2 position-absolute start-0 ms-2">☰</button>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+ <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+  <div class="container-fluid px-4 d-flex justify-content-between align-items-center">
+    <!-- Sidebar Toggle Left -->
+    <button id="sidebarToggle" class="btn btn-outline-secondary me-2">☰</button>
+
+    <!-- Center Brand -->
+    <a class="navbar-brand fw-bold mx-auto text-center" href="/">Colorful Moves</a>
+
+    <!-- Menu Toggle Right -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
