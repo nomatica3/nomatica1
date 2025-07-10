@@ -27,6 +27,7 @@ body {
   width: 220px;
   height: 100vh;
   overflow-y: auto;
+
 }
 
 /* Sidebar links */
@@ -38,9 +39,6 @@ body {
 #sidebarMenu .nav-link:hover {
   background-color: #e9ecef;
   color: #0d6efd;
-}
-#sidebarMenu ul {
-  margin-top: 3rem;
 }
 
 /* Navbar and footer adjustments are handled inline in the HTML styles */
