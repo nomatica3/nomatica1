@@ -38,6 +38,18 @@ app.get('/explore', (req, res) => {
   res.render('explore');
 });
 
+app.get('/favorites', (req, res) => {
+  res.render('favorites');
+});
+app.get('/find-contracts', (req, res) => {
+  res.render('find-contracts');
+});
+app.get('/local-contractors', (req, res) => {
+  res.render('local-contractors');
+});
+app.get('/submit-proposal', (req, res) => {
+  res.render('submit-proposal');
+}); 
 app.get('/settings', (req, res) => {
   res.render('settings');
 });
