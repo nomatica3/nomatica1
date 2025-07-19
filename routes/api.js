@@ -42,6 +42,7 @@ app.get('/explore', (req, res) => {
 app.get('/favorites', (req, res) => {
   res.render('favorites');
 });
+
 app.get('/calendar', (req, res) => {
   res.render('calendar');
 });
