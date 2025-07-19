@@ -119,7 +119,7 @@ app.post('/api/openai', async (req, res) => {
     }
 
 const completion = await openai.createChatCompletion({
-  model: 'gpt-4', // or 'gpt-3.5-turbo'
+  model: 'gpt-3.5-turbo',
   messages: [
     {
       role: 'system',
