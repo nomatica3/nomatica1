@@ -43,6 +43,7 @@ html, body {
   background: #007bff;
   color: #fff;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 0 1rem;
   z-index: 1000;
