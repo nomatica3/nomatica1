@@ -21,6 +21,7 @@ const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 // Repeat for all the other pages, rendering EJS templates from views:
 app.get('/library', (req, res) => {
   res.render('library');
@@ -41,15 +42,22 @@ app.get('/explore', (req, res) => {
 app.get('/favorites', (req, res) => {
   res.render('favorites');
 });
+app.get('/calendar', (req, res) => {
+  res.render('calendar');
+});
+
 app.get('/find-contracts', (req, res) => {
   res.render('find-contracts');
 });
+
 app.get('/local-contractors', (req, res) => {
   res.render('local-contractors');
 });
+
 app.get('/submit-proposal', (req, res) => {
   res.render('submit-proposal');
-}); 
+});
+
 app.get('/settings', (req, res) => {
   res.render('settings');
 });
@@ -110,14 +118,25 @@ app.post('/api/openai', async (req, res) => {
       return res.status(400).json({ error: 'No prompt provided' });
     }
 
-    const completion = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',  // or 'gpt-4' if you have access
-      messages: [
-        { role: 'system', content: 'You are a helpful assistant.' },
-        { role: 'user', content: prompt }
-      ],
-      max_tokens: 500,
-    });
+const completion = await openai.createChatCompletion({
+  model: 'gpt-4', // or 'gpt-3.5-turbo'
+  messages: [
+    {
+      role: 'system',
+      content: `You are a contract automation assistant for Colorful-Moves.com.
+The goal is to:
+1. Find contracts online,
+2. Submit proposals via email,
+3. Locate subcontractors within 30 miles with working contact info,
+4. Calculate markup prices based on city/state averages,
+5. Support a vendor portal for networking and document uploads,
+6. Maintain an admin portal with performance tracking and a contract calendar,
+7. Always include a human in the loop for email confirmation.`
+    },
+    { role: 'user', content: prompt }
+  ],
+  max_tokens: 800,
+});
 
     const aiResponse = completion.data.choices[0].message.content;
     res.json({ response: aiResponse });
