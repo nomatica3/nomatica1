@@ -6,9 +6,10 @@
   <title><%= title %> | Colorful Moves</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/css/styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <style>
     body {
-      padding-left: 220px; /* Reserve space for sidebar */
+      padding-left: 220px;
       min-height: 100vh;
     }
     #sidebarMenu.hidden {
@@ -17,78 +18,58 @@
     .main-content {
       transition: margin-left 0.3s;
     }
+    .brand-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .brand-subtitle {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: -4px;
+    }
   </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
   <!-- Header / Navbar -->
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm mb-auto py-3">
     <div class="container-fluid px-4 d-flex justify-content-between align-items-center">
+
       <!-- Sidebar Toggle Left -->
       <button id="sidebarToggle" class="btn btn-outline-secondary me-2">☰</button>
 
-      <!-- Center Brand -->
-      <a class="navbar-brand fw-bold mx-auto text-center d-flex align-items-center justify-content-center" href="/" style="height: 100%;">
-        Colorful Moves
-      </a>
+      <!-- Center Brand + Subtitle -->
+      <div class="brand-container mx-auto">
+        <a class="navbar-brand fw-bold" href="/" style="font-size: 1.4rem;">Colorful Moves</a>
+        <div class="brand-subtitle">Welcome to our Platform</div>
+      </div>
 
-<!-- Navbar Menu Collapse -->
-<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown" style="margin-top:56px;">
-  <ul class="navbar-nav">
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="mainDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="bi bi-three-dots-vertical"></i> <!-- Optional: icon for modern UI -->
-      </a>
-      <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="mainDropdown">
-        <li><a class="dropdown-item" href="/vendor-portal">Vendor Portal</a></li>
-        <li><a class="dropdown-item" href="/admin-portal">Admin Portal</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item text-danger" href="#">Log Out</a></li>
-      </ul>
-    </li>
-  </ul>
-</div>
+      <!-- Dropdown Menu Right -->
+      <div class="dropdown">
+        <button class="btn" id="mainDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-three-dots-vertical"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="mainDropdown">
+          <li><a class="dropdown-item" href="/vendor-portal">Vendor Portal</a></li>
+          <li><a class="dropdown-item" href="/admin-portal">Admin Portal</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item text-danger" href="#">Log Out</a></li>
+        </ul>
+      </div>
 
-<!-- Menu Toggle Right -->
-<button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-</button>
     </div>
   </nav>
 
-<!-- Navbar Menu Collapse -->
-<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown" style="margin-top:56px;">
-  <ul class="navbar-nav">
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="mainDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="bi bi-three-dots-vertical"></i> <!-- Optional: icon for modern UI -->
-      </a>
-      <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="mainDropdown">
-        <li><a class="dropdown-item" href="/vendor-portal">Vendor Portal</a></li>
-        <li><a class="dropdown-item" href="/admin-portal">Admin Portal</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item text-danger" href="#">Log Out</a></li>
-      </ul>
-    </li>
-  </ul>
-</div>
-
   <!-- Sidebar -->
   <nav id="sidebarMenu" class="bg-light border-end position-fixed h-100 p-3" style="width:220px; top:56px; left:0; transition:margin 0.3s;">
-    <ul class="nav flex-column mt-4"on>
+    <ul class="nav flex-column mt-4">
       <li class="nav-item"><a class="nav-link" href="/new-chat">📝 New Chat</a></li>
-      <!--li class="nav-item"><a class="nav-link" href="/find-contracts">🔍 Find Contracts</a></li-->
-      <!--li class="nav-item"><a class="nav-link" href="/local-contractors">👷🏽 Local Contractors</a></li-->
-      <!--li class="nav-item"><a class="nav-link" href="/submit-proposal">📚 Submit Proposals</a></li-->
-      <!--li class="nav-item"><a class="nav-link" href="/calendar">📅 Calendar</a></li-->
-      <!--li class="nav-item"><a class="nav-link" href="/images">🖼️ Images</a></li-->
-      <!--li class="nav-item"><a class="nav-link" href="/videos">🎥 Videos</a></li-->
       <li class="nav-item"><a class="nav-link" href="/explore">🌐 Explore</a></li>
-      <!--li class="nav-item"><a class="nav-link" href="/favorites">⭐ Favorites</a></li-->
       <li class="nav-item"><a class="nav-link" href="/settings">⚙️ Settings</a></li>
       <li class="nav-item"><a class="nav-link" href="/help">❓ Help</a></li>
-      <!--li class="nav-item"><a class="nav-link" href="/about">ℹ️ About</a></li-->
     </ul>
   </nav>
 
