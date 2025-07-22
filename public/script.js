@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleBtn.addEventListener('click', () => {
       sidebar.classList.toggle('active');
       toggleBtn.textContent = sidebar.classList.contains('active')
-        ? '✖ Close Sidebar'
-        : '☰ Toggle Sidebar';
+        ? '✖ Close'
+        : '☰ Open';
     });
   }
   document.querySelector("#send-button").addEventListener("click", async () => {
