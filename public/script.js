@@ -28,16 +28,27 @@ document.addEventListener('DOMContentLoaded', () => {
   //window.addEventListener('resize', moveAndColor);
 
   // SIDEBAR TOGGLE
+document.addEventListener('DOMContentLoaded', () => {
   const toggleBtn = document.getElementById('sidebarToggle');
   const sidebar = document.getElementById('sidebarMenu');
+
+  // Initially ensure the sidebar is closed
+  if (sidebar && !sidebar.classList.contains('active')) {
+    sidebar.classList.remove('active');
+    toggleBtn.textContent = '☰';
+    document.body.style.paddingLeft = '0';
+  }
+
+  // Toggle button behavior
   if (toggleBtn && sidebar) {
     toggleBtn.addEventListener('click', () => {
       sidebar.classList.toggle('active');
-      toggleBtn.textContent = sidebar.classList.contains('active')
-        ? '✖'
-        : '☰';
+      toggleBtn.textContent = sidebar.classList.contains('active') ? '✖' : '☰';
+      document.body.style.paddingLeft = sidebar.classList.contains('active') ? '220px' : '0';
     });
   }
+});
+  // AI Chat functionality
   document.querySelector("#send-button").addEventListener("click", async () => {
   const input = document.querySelector("#message-input").value;
 
