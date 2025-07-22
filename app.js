@@ -27,7 +27,7 @@ const pages = [
   { path: "/new-chat", view: "new-chat", title: "New Chat" },
   { path: "/find-contracts", view: "find-contracts", title: "Find Contracts" },
   { path: "/submit-proposal", view: "submit-proposal", title: "Submit Proposal" },
-  { path: "/local-subcontractors", view: "local-subcontractors", title: "Local Subcontractors" },
+  { path: "/local-contractors", view: "local-contractors", title: "Local Contractors" },
   { path: "/vendor-portal", view: "vendor-portal", title: "Vendor Portal" },
   { path: "/library", view: "library", title: "Library" },
   { path: "/search-chats", view: "search-chats", title: "Search Chats" },
