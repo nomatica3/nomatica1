@@ -22,6 +22,7 @@
 <body class="d-flex flex-column min-vh-100">
 
   <!-- Header / Navbar -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm mb-auto py-3">
     <div class="container-fluid px-4 d-flex justify-content-between align-items-center">
       <!-- Sidebar Toggle Left -->
@@ -32,28 +33,46 @@
         Colorful Moves
       </a>
 
-      <!-- Menu Toggle Right -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<!-- Navbar Menu Collapse -->
+<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown" style="margin-top:56px;">
+  <ul class="navbar-nav">
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="mainDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-three-dots-vertical"></i> <!-- Optional: icon for modern UI -->
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="mainDropdown">
+        <li><a class="dropdown-item" href="/vendor-portal">Vendor Portal</a></li>
+        <li><a class="dropdown-item" href="/admin-portal">Admin Portal</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" href="#">Log Out</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<!-- Menu Toggle Right -->
+<button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
     </div>
   </nav>
 
-  <!-- Navbar Menu Collapse -->
-  <div class="collapse navbar-collapse" id="navbarNavDropdown" style="margin-top:56px;">
-    <ul class="navbar-nav ms-auto me-4">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="mainDropdown" role="button" data-bs-toggle="dropdown">
-          Menu
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end">
-          <li><a class="dropdown-item" href="/vendor-portal">Vendor Portal</a></li>
-          <li><a class="dropdown-item" href="/admin-portal">Admin Portal</a></li>
-          <li><hr class="dropdown-divider"></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
+<!-- Navbar Menu Collapse -->
+<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown" style="margin-top:56px;">
+  <ul class="navbar-nav">
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="mainDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-three-dots-vertical"></i> <!-- Optional: icon for modern UI -->
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="mainDropdown">
+        <li><a class="dropdown-item" href="/vendor-portal">Vendor Portal</a></li>
+        <li><a class="dropdown-item" href="/admin-portal">Admin Portal</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" href="#">Log Out</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
 
   <!-- Sidebar -->
   <nav id="sidebarMenu" class="bg-light border-end position-fixed h-100 p-3" style="width:220px; top:56px; left:0; transition:margin 0.3s;">
@@ -63,8 +82,8 @@
       <!--li class="nav-item"><a class="nav-link" href="/local-contractors">👷🏽 Local Contractors</a></li-->
       <!--li class="nav-item"><a class="nav-link" href="/submit-proposal">📚 Submit Proposals</a></li-->
       <!--li class="nav-item"><a class="nav-link" href="/calendar">📅 Calendar</a></li-->
-      <li class="nav-item"><a class="nav-link" href="/images">🖼️ Images</a></li>
-      <li class="nav-item"><a class="nav-link" href="/videos">🎥 Videos</a></li>
+      <!--li class="nav-item"><a class="nav-link" href="/images">🖼️ Images</a></li-->
+      <!--li class="nav-item"><a class="nav-link" href="/videos">🎥 Videos</a></li-->
       <li class="nav-item"><a class="nav-link" href="/explore">🌐 Explore</a></li>
       <!--li class="nav-item"><a class="nav-link" href="/favorites">⭐ Favorites</a></li-->
       <li class="nav-item"><a class="nav-link" href="/settings">⚙️ Settings</a></li>
