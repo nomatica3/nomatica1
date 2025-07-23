@@ -1,14 +1,82 @@
-<%- include('partials/header') %>
-<%- include('partials/sidebar') %>
-
-<main class="main-content shifted p-4 mt-5 flex-fill d-flex align-items-center justify-content-center">
-  <form id="chat-form" class="w-100" style="max-width: 700px;">
-    <div class="mb-3">
-      <textarea id="user-input" class="form-control" placeholder="Ask me anything..." rows="4" required></textarea>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New Chat | Colorful Moves</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script defer src="/js/sidebar.js"></script>
+</head>
+<body>
+  <div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-light border-end" id="sidebar-wrapper">
+      <div class="sidebar-heading text-center py-3">
+        <strong>Colorful Moves</strong>
+      </div>
+      <div class="list-group list-group-flush">
+        <a href="/new-chat" class="list-group-item list-group-item-action">📝 New Chat</a>
+        <a href="/explore" class="list-group-item list-group-item-action">🌐 Explore</a>
+        <a href="/settings" class="list-group-item list-group-item-action">⚙ Settings</a>
+        <a href="/help" class="list-group-item list-group-item-action">❓ Help</a>
+      </div>
+      <footer class="text-center mt-auto py-3 small">
+        &copy; <%= new Date().getFullYear() %> Colorful Moves. All rights reserved. <br>
+        <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+      </footer>
     </div>
-    <button type="submit" class="btn btn-primary w-100">Send</button>
-    <div id="response-container" class="mt-4"></div>
-  </form>
-</main>
 
-<%- include('partials/footer') %>
+    <!-- Page content wrapper -->
+    <div id="page-content-wrapper" class="w-100">
+      <button class="btn btn-outline-secondary m-2" id="menu-toggle">&#9776;</button>
+      <div class="container mt-4">
+        <h2 class="mb-4 text-center">Custom AI Automations</h2>
+        <form id="chat-form">
+          <div class="input-group mb-3">
+            <input type="text" id="user-input" class="form-control" placeholder="Ask me anything..." required>
+            <button class="btn btn-primary" type="submit">Send</button>
+          </div>
+        </form>
+        <div id="chat-response" class="border rounded p-3" style="min-height: 100px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sidebar toggle
+    document.getElementById("menu-toggle").addEventListener("click", function () {
+      document.getElementById("wrapper").classList.toggle("toggled");
+      localStorage.setItem("sidebar-collapsed", document.getElementById("wrapper").classList.contains("toggled"));
+    });
+
+    // Sidebar state persistence
+    window.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("sidebar-collapsed") === "true") {
+        document.getElementById("wrapper").classList.add("toggled");
+      }
+    });
+
+    // Chat form submission
+    const chatForm = document.getElementById('chat-form');
+    const userInput = document.getElementById('user-input');
+    const responseDiv = document.getElementById('chat-response');
+
+    chatForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const question = userInput.value;
+      responseDiv.innerHTML = '<em>Thinking...</em>';
+
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: question })
+      });
+
+      const data = await res.json();
+      responseDiv.innerHTML = `<p>${data.reply}</p>`;
+      userInput.value = '';
+    });
+  </script>
+</body>
+</html>
