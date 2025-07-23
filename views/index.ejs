@@ -41,5 +41,33 @@ async function sendToCAPS() {
   }
 }
 </script>
+<script>
+  const chatLog = [];
+
+  async function sendMessage() {
+    const userInput = document.getElementById("chatInput").value;
+    chatLog.push({ role: "user", content: userInput });
+    updateChatUI(userInput, "user");
+
+    const response = await fetch("/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: chatLog })
+    });
+
+    const data = await response.json();
+    chatLog.push({ role: "assistant", content: data.reply });
+    updateChatUI(data.reply, "assistant");
+  }
+
+  function updateChatUI(message, role) {
+    const chatBox = document.getElementById("chatBox");
+    const msgEl = document.createElement("div");
+    msgEl.className = `message ${role}`;
+    msgEl.textContent = message;
+    chatBox.appendChild(msgEl);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+</script>
 </body>
 </html>

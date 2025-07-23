@@ -27,40 +27,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //window.addEventListener('resize', moveAndColor);
 
-  // SIDEBAR TOGGLE
 document.addEventListener('DOMContentLoaded', () => {
-  const toggleBtn = document.getElementById('sidebarToggle');
   const sidebar = document.getElementById('sidebarMenu');
+  const toggleBtn = document.getElementById('sidebarToggle');
+  const mainContent = document.querySelector('.main-content');
 
-  // Initially ensure the sidebar is closed
-  if (sidebar && !sidebar.classList.contains('active')) {
-    sidebar.classList.remove('active');
+  if (toggleBtn && sidebar) {
+    sidebar.classList.add('hidden');
     toggleBtn.textContent = '☰';
     document.body.style.paddingLeft = '0';
-  }
 
-  // Toggle button behavior
-  if (toggleBtn && sidebar) {
     toggleBtn.addEventListener('click', () => {
-      sidebar.classList.toggle('active');
-      toggleBtn.textContent = sidebar.classList.contains('active') ? '✖' : '☰';
-      document.body.style.paddingLeft = sidebar.classList.contains('active') ? '220px' : '0';
+      sidebar.classList.toggle('hidden');
+      const isHidden = sidebar.classList.contains('hidden');
+      document.body.style.paddingLeft = isHidden ? '0' : '220px';
+      mainContent.classList.toggle('shifted', !isHidden);
     });
   }
-});
-  // AI Chat functionality
-  document.querySelector("#send-button").addEventListener("click", async () => {
-  const input = document.querySelector("#message-input").value;
 
-  const response = await fetch("/api/openai", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ message: input })
+  const form = document.getElementById('chat-form');
+  const userInput = document.getElementById('user-input');
+  const responseContainer = document.getElementById('response-container');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const message = userInput.value.trim();
+    if (!message) return;
+
+    responseContainer.innerHTML = `<p><strong>You:</strong> ${message}</p><p><em>Thinking...</em></p>`;
+
+    try {
+      const res = await fetch('/api/openai', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      });
+
+      const data = await res.json();
+      responseContainer.innerHTML = `
+        <p><strong>You:</strong> ${message}</p>
+        <p><strong>Assistant:</strong> ${data.response}</p>
+      `;
+      userInput.value = '';
+    } catch (error) {
+      console.error(error);
+      responseContainer.innerHTML = `<p class="text-danger">Error: Something went wrong.</p>`;
+    }
   });
-
-  const data = await response.json();
-  document.querySelector("#response").textContent = data.response;
-});
 });

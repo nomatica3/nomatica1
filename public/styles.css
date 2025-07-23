@@ -4,7 +4,7 @@ html, body {
   font-family: system-ui, sans-serif;
 }
 
-/* Header fixed at the top */
+/* Header */
 .header {
   position: fixed;
   top: 0;
@@ -20,10 +20,10 @@ html, body {
   z-index: 1000;
 }
 
-/* Sidebar BELOW header */
+/* Sidebar */
 .sidebar {
   position: fixed;
-  top: 60px; /* below header */
+  top: 60px;
   left: 0;
   width: 220px;
   bottom: 0;
@@ -53,7 +53,7 @@ html, body {
   color: #4a90e2;
 }
 
-/* Footer fixed at bottom */
+/* Footer */
 .footer {
   position: fixed;
   bottom: 0;
@@ -66,14 +66,14 @@ html, body {
   z-index: 1000;
 }
 
-/* Main content */
+/* Main Content */
 .main-content {
-  margin-top: 60px; /* header */
-  margin-left: 0; /* default if sidebar hidden */
-  margin-bottom: 60px; /* footer */
+  margin-top: 60px;
+  margin-left: 0;
+  margin-bottom: 60px;
   padding: 1rem;
-  transition: margin-left 0.3s;
   min-height: calc(100vh - 120px);
+  transition: margin-left 0.3s;
 }
 .main-content.shifted {
   margin-left: 220px;
