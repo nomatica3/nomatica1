@@ -1,0 +1,6 @@
+{
+    "name": "llama",
+    "role": "email_writer",
+    "tasks":[ "email_generator", "analyst", "generate_reports" , "scrape_web" ],
+    "permissions": [ "read_web", "send_data" ]
+}

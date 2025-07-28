@@ -1,0 +1,6 @@
+{
+    "name": "gemma",
+    "role": "contract_finder",
+    "tasks":[ "find_contracts", "analyze_bids", "generate_reports" , "scrape_web" ],
+    "permissions": [ "read_web", "send_data" ]
+}

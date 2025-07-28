@@ -1,0 +1,6 @@
+{
+    "name": "phi4",
+    "role": "data_synthesizer",
+    "tasks": [ "data_integration", "insight_generation", "report_creation" ],
+    "permissions": [ "read_data", "write_data" ]
+}

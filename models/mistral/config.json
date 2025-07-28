@@ -1,0 +1,6 @@
+{
+    "name": "mistral",
+    "role": "data_analyzer",
+    "tasks": [ "data_collection", "data_processing", "report_generation" ],
+    "permissions": [ "read_data", "write_data" ]
+}
