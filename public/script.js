@@ -74,4 +74,55 @@ document.addEventListener('DOMContentLoaded', () => {
       responseContainer.innerHTML = `<p class="text-danger">Error: Something went wrong.</p>`;
     }
   });
-});
+})
+ // === MULTI-MODEL CHAT ===
+  const modelSelect = document.getElementById('model-selector');
+  const sendBtn = document.getElementById('send-btn');
+  const chatBox = document.getElementById('chat-box');
+
+  if (sendBtn && modelSelect && chatBox) {
+    sendBtn.addEventListener('click', async () => {
+      const prompt = userInput.value.trim();
+      const model = modelSelect.value;
+      if (!prompt) return;
+
+      chatBox.innerHTML += `<p><strong>You:</strong> ${prompt}</p><p><em>${model} thinking...</em></p>`;
+
+      try {
+        const res = await fetch(`/chat/${model}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt })
+        });
+
+        const data = await res.json();
+        chatBox.innerHTML += `<p><strong>${model}:</strong> ${data.reply}</p>`;
+        userInput.value = '';
+      } catch (err) {
+        console.error(err);
+        chatBox.innerHTML += `<p class="text-danger">${model} failed to respond.</p>`;
+      }
+    });
+  }
+
+  // === ADMIN BROADCAST TO ALL MODELS ===
+  const updateBtn = document.getElementById('update-btn');
+  if (updateBtn) {
+    updateBtn.addEventListener('click', async () => {
+      const update = prompt("Broadcast message to all models:");
+      if (!update) return;
+
+      try {
+        const res = await fetch('/admin/update', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ update })
+        });
+        const result = await res.json();
+        alert("Update complete:\n" + JSON.stringify(result, null, 2));
+      } catch (err) {
+        alert("Update failed.");
+        console.error(err);
+      }
+    });
+  }
