@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //window.addEventListener('resize', moveAndColor);
 
-document.addEventListener('DOMContentLoaded', () => {
   const sidebar = document.getElementById('sidebarMenu');
   const toggleBtn = document.getElementById('sidebarToggle');
   const mainContent = document.querySelector('.main-content');
@@ -122,8 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
         alert("Update failed.");
         console.error(err);
           console.error(err);
-        }
-      });
-    }
+            console.error(err);
+          }
+        });
+      }
     }
   });

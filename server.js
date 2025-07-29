@@ -28,9 +28,7 @@ app.post ('/admin/update', async (req, res) => {
     console.error('Update error:', error);
     res.status(500).json({ error: 'Failed to broadcast update.' });
   }
-}
-res.json(results);
-);
+});
 
 function getPort(model) {
   const modelPortMap = {
@@ -52,7 +50,6 @@ app.use("/chat", chatRoutes);
 app.use("/explore", exploreRoutes);
 app.use(bodyParser.json());
 
-const app = express();
 const expressLayouts = require('express-ejs-layouts');
 app.use(expressLayouts);
 
@@ -80,7 +77,7 @@ app.post('/chat', async (req, res) => {
 app.listen(5000, () => console.log("Server running on port 5000"));
 
 // Setup OpenAI
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+// const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 // EJS setup
 app.set('view engine', 'ejs');
