@@ -4,8 +4,13 @@ const vhost = require("vhost");
 const path = require("path");
 const bodyParser = require("body-parser");
 const { Configuration, OpenAIApi } = require("openai");
-
+const exploreRoutes = require("./routes/index");
+const exploreModelRoutes = require("./routes/explore");
 const app = express();
+const chatRoutes = require("./routes/chat");
+
+app.use('/', exploreRoutes);
+app.use('/explore', exploreModelRoutes);
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

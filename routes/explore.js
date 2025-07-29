@@ -1,6 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
+const models = ["gemma", "llama", "mistral", "phi4", "gpt3_5", "gpt4"];
+
+models.forEach(model => {
+  router.get(`/${model}`, (req, res) => {
+    res.render(model, { title: `Try ${model.charAt(0).toUpperCase()} AI` });
+  });
+});
+
 // Route to main explore page
 router.get("/", (req, res) => {
   res.render("explore", { title: "Explore AI Models" });
@@ -30,3 +38,4 @@ router.get("/phi4", (req, res) => {
   res.render("phi4", { title: "Try Phi-4 AI" });
 }
 );
+module.exports = router;

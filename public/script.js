@@ -127,3 +127,28 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
+  document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".model-card .btn");
+
+  buttons.forEach(button => {
+    button.addEventListener("click", async (e) => {
+      e.preventDefault();
+      const modelName = button.href.split("/").pop();  // gemma, llama, etc.
+
+      const userMessage = prompt(`Ask something to ${modelName.toUpperCase()} AI:`);
+
+      if (userMessage) {
+        const response = await fetch(`/api/chat/${modelName}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ message: userMessage })
+        });
+
+        const data = await response.json();
+        alert(`${modelName.toUpperCase()} says: ${data.reply}`);
+      }
+    });
+  });
+});
