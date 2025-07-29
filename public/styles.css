@@ -35,15 +35,17 @@ html, body {
   transition: margin-left 0.3s;
 }
 .sidebar.hidden {
+  display: none;
   margin-left: -240px;
 }
 .sidebar ul {
+  display: none;
   list-style: none;
   padding: 0;
   margin: 0;
 }
 .sidebar li a {
-  display: block;
+  display: none;
   padding: 0.75rem 1rem;
   color: #333;
   text-decoration: none;
@@ -78,3 +80,14 @@ html, body {
 .main-content.shifted {
   margin-left: 220px;
 }
+
+/* Hide sidebar on small screens */
+@media (max-width: 767px) {
+  .sidebar-menu {
+    display: none;
+  }
+  .sidebar-menu.active{
+    display: none;
+  }
+  
+} 
