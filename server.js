@@ -8,7 +8,46 @@ const chatRoutes = require("./routes/chat");
 const bodyParser = require("body-parser");
 const { Configuration, OpenAIApi } = require("openai");
 const app = express();
+const models = ["llama", "gemma", "mistral", "phi4", "gpt-4", "gpt-3.5", "claude", "bard", "deepseek", "deepseek-2"];
 
+app.post ('/admin/update', async (req, res) => {
+  const update = req.body.update;
+  if (!update) return res.status(400).json({ error: 'No update message provided' });
+
+  try {
+    for (const model of models) {
+      const response = await fetch(`http://localhost:${getPort[model]}/broadcast`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ update })
+      });
+      if (!response.ok) throw new Error(`Failed to update ${model}`);
+    }
+    res.json({ success: true, message: 'Update broadcasted to all models.' });
+  } catch (error) {
+    console.error('Update error:', error);
+    res.status(500).json({ error: 'Failed to broadcast update.' });
+  }
+}
+res.json(results);
+);
+
+function getPort(model) {
+  const modelPortMap = {
+    gemma: 5001,
+    llama: 5002,
+    mistral: 5003,
+    openchat: 5004,
+    phi4: 5005,
+    gpt3_5: 5006,
+    gpt4: 5007,
+    claude: 5008,
+    bard: 5009,
+    deepseek: 5010,
+    deepseek2: 5011
+  };
+  return modelPortMap[model] || null;
+}
 app.use("/chat", chatRoutes);
 app.use("/explore", exploreRoutes);
 app.use(bodyParser.json());

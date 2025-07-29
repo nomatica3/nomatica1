@@ -1,0 +1,16 @@
+app.post('/broadcast', (req, res) => {
+  const { update } = req.body;
+  if (!update) return res.status(400).json({ error: 'No update message provided' });
+
+  // Broadcast the update to all connected clients
+  // (Implementation depends on your WebSocket or server-sent events setup)
+
+  res.json({ success: true, message: 'Update broadcasted to all clients.' });
+});
+
+console.log('Llama model is running on port 5002');
+  } catch (err) {
+    console.error('Llama error:', err.message);
+    res.status(500).send('Llama model unavailable');
+  }
+});
