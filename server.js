@@ -5,7 +5,6 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const { Configuration, OpenAIApi } = require("openai");
 const exploreRoutes = require("./routes/index");
-const exploreModelRoutes = require("./routes/explore");
 const app = express();
 const chatRoutes = require("./routes/chat");
 
