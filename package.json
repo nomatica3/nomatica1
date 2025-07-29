@@ -1,7 +1,7 @@
 {
   "name": "colorful-moves",
   "version": "1.0.0",
-  "description": "A dynamic Node.js app using Express and EJS",
+  "description": "Multi-model AI Chatbot Platform with dynamic, secure routing and EJS templating",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -16,13 +16,16 @@
     "dynamic",
     "nodejs"
   ],
-  "author": "",
+  "author": "Jeremy J. Johnson",
   "license": "MIT",
+  "type": "commonjs",
   "engines": {
     "node": "22.x"
   },
   "dependencies": {
     "axios": "^1.10.0",
+    "body-parser": "^1.20.2",
+    "cors": "2.8.5",
     "bootstrap": "^5.3.7",
     "dotenv": "^16.6.1",
     "ejs": "^3.1.10",
@@ -31,10 +34,11 @@
     "morgan": "^1.10.0",
     "nodemailer": "^7.0.4",
     "openai": "^5.8.2",
-    "puppeteer": "^24.11.2"
+    "puppeteer": "^24.11.2",
+    "vhost": "^3.0.2"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.1.0"
   }
 }
