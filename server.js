@@ -2,196 +2,79 @@ require("dotenv").config();
 const express = require("express");
 const vhost = require("vhost");
 const path = require("path");
-const OpenAI = require("openai");
-const exploreRoutes = require("./routes/explore");
-const chatRoutes = require("./routes/chat");
 const bodyParser = require("body-parser");
 const { Configuration, OpenAIApi } = require("openai");
+
 const app = express();
-const models = ["llama", "gemma", "mistral", "phi4", "gpt-4", "gpt-3.5", "claude", "bard", "deepseek", "deepseek-2"];
-
-app.post ('/admin/update', async (req, res) => {
-  const update = req.body.update;
-  if (!update) return res.status(400).json({ error: 'No update message provided' });
-
-  try {
-    for (const model of models) {
-      const response = await fetch(`http://localhost:${getPort[model]}/broadcast`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ update })
-      });
-      if (!response.ok) throw new Error(`Failed to update ${model}`);
-    }
-    res.json({ success: true, message: 'Update broadcasted to all models.' });
-  } catch (error) {
-    console.error('Update error:', error);
-    res.status(500).json({ error: 'Failed to broadcast update.' });
-  }
-});
-
-function getPort(model) {
-  const modelPortMap = {
-    gemma: 5001,
-    llama: 5002,
-    mistral: 5003,
-    openchat: 5004,
-    phi4: 5005,
-    gpt3_5: 5006,
-    gpt4: 5007,
-    claude: 5008,
-    bard: 5009,
-    deepseek: 5010,
-    deepseek2: 5011
-  };
-  return modelPortMap[model] || null;
-}
-app.use("/chat", chatRoutes);
-app.use("/explore", exploreRoutes);
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const expressLayouts = require('express-ejs-layouts');
 app.use(expressLayouts);
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
+// View engine setup
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
-app.post('/chat', async (req, res) => {
-  const { message } = req.body;
+// Mount core routes
+const chatRoutes = require("./routes/chat");
+const exploreRoutes = require("./routes/explore");
+app.use("/chat", chatRoutes);
+app.use("/explore", exploreRoutes);
+
+// Subdomain routing (optional)
+app.use(vhost('gemma.nomatica.colorfulmoves.com', require('./routes/gemma')));
+app.use(vhost('llama.nomatica.colorfulmoves.com', require('./routes/llama')));
+app.use(vhost('mistral.nomatica.colorfulmoves.com', require('./routes/mistral')));
+
+// Admin update route
+const models = ["gemma", "llama", "mistral", "phi4", "gpt3_5", "gpt4"];
+function getPort(model) {
+  return {
+    gemma: 5001,
+    llama: 5002,
+    mistral: 5003,
+    phi4: 5005,
+    gpt3_5: 5006,
+    gpt4: 5007
+  }[model] || null;
+}
+app.post('/admin/update', async (req, res) => {
+  const update = req.body.update;
+  if (!update) return res.status(400).json({ error: 'No update provided' });
+
   try {
-    const completion = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: message }],
-    });
-
-    const reply = completion.data.choices[0].message.content;
-    res.json({ reply });
-  }
-  catch (err) {
+    for (const model of models) {
+      const port = getPort(model);
+      await fetch(`http://localhost:${port}/broadcast`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ update })
+      });
+    }
+    res.json({ success: true, message: "Broadcast successful" });
+  } catch (err) {
     console.error(err);
-    res.status(500).json({ reply: "Sorry, something went wrong." });
+    res.status(500).json({ error: "Broadcast failed" });
   }
 });
-app.listen(5000, () => console.log("Server running on port 5000"));
 
-// Setup OpenAI
-// const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
-// EJS setup
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
-// Middleware
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Routes
+// UI Routes
 app.get("/", (req, res) => res.render("index", { title: "Home" }));
 app.get("/about", (req, res) => res.render("about", { title: "About" }));
-app.get("/help", (req, res) => res.render("help", { title: "Help" }));
-app.get("/contact", (req, res) => res.render("contact", { title: "Contact" }));
-app.get("/privacy", (req, res) => res.render("privacy", { title: "Privacy Policy" }));
-app.get("/terms", (req, res) => res.render("terms", { title: "Terms of Service" }));
-app.get("/404", (req, res) => res.status(404).render("404", { title: "Page Not Found" }));
-app.get("/500", (req, res) => res.status(500).render("500", { title: "Internal Server Error" }));
-app.get("/admin-portal", (req, res) => res.render("admin-portal", { title: "Admin Portal" }));
-app.get("/new-chat", (req, res) => res.render("new-chat", { title: "New Chat" }));
-app.get("/find-contracts", (req, res) => res.render("find-contracts", { title: "Find Contracts" }));
-app.get("/submit-proposal", (req, res) => res.render("submit-proposal", { title: "Submit Proposal" }));
-app.get("/local-subcontractors", (req, res) => res.render("local-subcontractors", { title: "Local Subcontractors" }));
-app.get("/vendor-portal", (req, res) => res.render("vendor-portal", { title: "Vendor Portal" }));
-app.get("/library", (req, res) => res.render("library", { title: "Library" }));
-app.get("/search-chats", (req, res) => res.render("search-chats", { title: "Search Chats" }));
-app.get("/images", (req, res) => res.render("images", { title: "Images" }));
-app.get("/videos", (req, res) => res.render("videos", { title: "Videos" }));
-app.get("/explore", (req, res) => res.render("explore", { title: "Explore" }));
-app.get("/settings", (req, res) => res.render("settings", { title: "Settings" }));
+// etc.
 
-// AI Endpoint
-app.post('/api/openai', async (req, res) => {
-  try {
-    const prompt = req.body.message;
-    if (!prompt) return res.status(400).json({ error: 'No prompt provided' });
-
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
-      messages: [
-        { role: 'system', content: 'You are a helpful assistant.' },
-        { role: 'user', content: prompt }
-      ],
-      max_tokens: 500
-    });
-
-    const aiResponse = completion.choices[0].message.content.trim();
-    res.json({ response: aiResponse });
-  } catch (error) {
-    console.error('OpenAI API error:', error);
-    res.status(500).json({ error: 'Failed to contact AI' });
-  }
-});
-
-// 404 fallback
-app.use((req, res) => res.status(404).send("Page not found."));
-
-// Error handler
+// Catch-all handlers
+app.use((req, res) => res.status(404).render("404", { title: "Not Found" }));
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send("Something broke!");
+  res.status(500).render("500", { title: "Server Error" });
 });
 
-// Start server
-const PORT = process.env.PORT || 3000;
+// ✅ Start ONE server
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log("OpenAI Key starts with:", process.env.OPENAI_API_KEY?.slice(0, 8));
 });
-
-// Subdomain: gemma.nomatica.colorfulmoves.com
-const gemmaApp = require('./routes/gemma');
-app.use(vhost('gemma.nomatica.colorfulmoves.com', gemmaApp));
-
-
-// Subdomain: llama.nomatica.colorfulmoves.com
-const llamApp = require ('./routes/llama');
-app.use(vhost('llama.nomatica.colorfulmoves.com', llamApp));
-
-
-// Subdomain: mistral.nomatica.colorfulmoves.com
-const mistralApp = require('./routes/mistral');
-app.use(vhost('mistral.nomatica.colorfulmoves.com', mistralApp));
-
-// Subdomain: openchat.nomatica.colorfulmoves.com
-const openchatApp = require('./routes/openchat');
-app.use(vhost('openchat.nomatica.colorfulmoves.com', openchatApp));
-
-// Subdomain: phi4.nomatica.colorfulmoves.com
-const phi4App = require('./routes/phi4');
-app.use(vhost('phi4.nomatica.colorfulmoves.com', phi4App));
-
-
-app.listen(5000, () => {
-  console.log("Main app running on port 5000");
-});
-
-app.listen(5001, () => {
-  console.log("Gemma app running on port 5001");
-});
-
-app.listen(5002, () => {
-  console.log("Llama app running on port 5002");
-}
-);
-app.listen(5003, () => {
-  console.log("Mistral app running on port 5003");
-});
-
-app.listen(5004, () => {
-  console.log("Openchat app running on port 5004");
-});
-
-app.listen(5005, () => {
-  console.log("Phi4 app running on port 5005");
-}); 
