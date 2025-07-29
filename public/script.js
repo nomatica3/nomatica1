@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.paddingLeft = isHidden ? '0' : '220px';
       mainContent.classList.toggle('shifted', !isHidden);
     });
-  }
 
   const form = document.getElementById('chat-form');
   const userInput = document.getElementById('user-input');
@@ -74,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
       responseContainer.innerHTML = `<p class="text-danger">Error: Something went wrong.</p>`;
     }
   });
-})
  // === MULTI-MODEL CHAT ===
   const modelSelect = document.getElementById('model-selector');
   const sendBtn = document.getElementById('send-btn');
@@ -123,6 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (err) {
         alert("Update failed.");
         console.error(err);
-      }
-    });
-  }
+          console.error(err);
+        }
+      });
+    }
+    }
+  });

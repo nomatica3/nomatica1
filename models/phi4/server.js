@@ -9,8 +9,3 @@
 });
 
 console.log('Phi4 model is running on port 5005');
-  } catch (err) {
-    console.error('Phi4 error:', err.message);
-    res.status(500).send('Phi4 model unavailable');
-  }
-});

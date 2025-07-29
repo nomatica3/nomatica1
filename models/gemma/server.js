@@ -9,8 +9,3 @@ app.post('/broadcast', (req, res) => {
 });
 
 console.log('Gemma model is running on port 5001');
-  } catch (err) {
-    console.error('Gemma error:', err.message);
-    res.status(500).send('Gemma model unavailable');
-  }
-});

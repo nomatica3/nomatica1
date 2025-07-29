@@ -4,22 +4,30 @@ const axios = require('axios');
 const fetch = require('node-fetch');
 
 router.post('/chat/:model', async (req, res) => {
-  const { model } = req.params.model.toLowerCase();
+  const model = req.params.model.toLowerCase();
   const { prompt } = req.body;
+
   if (model === 'gpt-3.5-turbo') {
     try {
-      const completion = await fetch('https://api.openai.com/v1/chat/completions', {
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
         },
-        const data = await response.json();
         body: JSON.stringify({
           model: 'gpt-3.5-turbo',
           messages: [{ role: 'user', content: prompt }],
           max_tokens: 500
         })
+      });
+      const data = await response.json();
+      return res.json({ reply: data.choices[0].message.content });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ reply: "Sorry, something went wrong." });
+    }
+  }
 
   const modelPortMap = {
     gemma: 5001,
@@ -47,7 +55,6 @@ router.post('/chat/:model', async (req, res) => {
     res.status(500).json({ reply: "Sorry, something went wrong." });
   }
 });
-module.exports = router;
 
 // GPT-3.5 Turbo chat Main Endpoint
 app.post('/api/chat', async (req, res) => {

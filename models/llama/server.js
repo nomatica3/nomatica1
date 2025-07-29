@@ -9,8 +9,3 @@ app.post('/broadcast', (req, res) => {
 });
 
 console.log('Llama model is running on port 5002');
-  } catch (err) {
-    console.error('Llama error:', err.message);
-    res.status(500).send('Llama model unavailable');
-  }
-});

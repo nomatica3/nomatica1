@@ -9,8 +9,3 @@ app.post('/broadcast', (req, res) => {
 });
 
 console.log('Mistral model is running on port 5003');
-  } catch (err) {
-    console.error('Mistral error:', err.message);
-    res.status(500).send('Mistral model unavailable');
-  }
-});

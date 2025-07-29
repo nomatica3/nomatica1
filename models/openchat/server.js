@@ -9,8 +9,3 @@ app.post('/broadcast', (req, res) => {
 });
 
 console.log('OpenChat model is running on port 5004');
-  } catch (err) {
-    console.error('OpenChat error:', err.message);
-    res.status(500).send('OpenChat model unavailable');
-  }
-});
