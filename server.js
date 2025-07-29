@@ -24,7 +24,6 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 // Mount core routes
-const chatRoutes = require("./routes/chat");
 const exploreRoutes = require("./routes/explore");
 app.use("/chat", chatRoutes);
 app.use("/explore", exploreRoutes);
