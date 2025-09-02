@@ -6,23 +6,6 @@ Welcome to the **CAPS** project!
  
 This README provides basic information and setup instructions.
 
-## Getting Started
-
-1. Clone the repository:
-    ```bash
-    git clone <repository-url>
-    cd nomatica1
-    ```
-
-2. Install dependencies:
-    ```bash
-    # Add your installation commands here
-    ```
-
-3. Run the project:
-    ```bash
-    # Add your run commands here
-    ```
 
 ## Contributing
 
