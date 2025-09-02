@@ -1,32 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // MOVING COLORFUL DIV
-  //const mover = document.createElement('div');
-  //mover.style.position = 'fixed';
-  //mover.style.width = '100px';
-  //mover.style.height = '100px';
-  //mover.style.borderRadius = '50%';
-  //mover.style.background = 'linear-gradient(45deg, red, yellow, green, blue)';
-  //mover.style.transition = 'all 0.7s cubic-bezier(.68,-0.55,.27,1.55)';
-  //mover.style.zIndex = 9999;
-  //mover.style.boxShadow = '0 0 30px 10px rgba(0,0,0,0.2)';
-  //document.body.appendChild(mover);
-  //console.log('script.js loaded');
-
-
-  //function randomGradient() {
-    //const stops = Array.from({length: 3 + Math.floor(Math.random() * 3)}, () =>
-      //`hsl(${Math.floor(Math.random() * 360)}, 80%, 60%)`
-    //);
-    //return `linear-gradient(${Math.floor(Math.random()*360)}deg, ${stops.join(', ')})`;
-  //}
-//mover.addEventListener('click', moveAndColor);
-  //let intervalId = setInterval(moveAndColor, 1000);
-
-  //mover.addEventListener('mouseenter', () => clearInterval(intervalId));
-  //mover.addEventListener('mouseleave', () => intervalId = setInterval(moveAndColor, 1000));
-
-  //window.addEventListener('resize', moveAndColor);
-
+  // Sidebar toggle
   const sidebar = document.getElementById('sidebarMenu');
   const toggleBtn = document.getElementById('sidebarToggle');
   const mainContent = document.querySelector('.main-content');
@@ -42,42 +15,47 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.paddingLeft = isHidden ? '0' : '220px';
       mainContent.classList.toggle('shifted', !isHidden);
     });
+  }
 
+  // Main chat form (/api/openai)
   const form = document.getElementById('chat-form');
   const userInput = document.getElementById('user-input');
   const responseContainer = document.getElementById('response-container');
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const message = userInput.value.trim();
-    if (!message) return;
+  if (form && userInput && responseContainer) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const message = userInput.value.trim();
+      if (!message) return;
 
-    responseContainer.innerHTML = `<p><strong>You:</strong> ${message}</p><p><em>Thinking...</em></p>`;
+      responseContainer.innerHTML = `<p><strong>You:</strong> ${message}</p><p><em>Thinking...</em></p>`;
 
-    try {
-      const res = await fetch('/api/openai', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message })
-      });
+      try {
+        const res = await fetch('/api/openai', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message })
+        });
 
-      const data = await res.json();
-      responseContainer.innerHTML = `
-        <p><strong>You:</strong> ${message}</p>
-        <p><strong>Assistant:</strong> ${data.response}</p>
-      `;
-      userInput.value = '';
-    } catch (error) {
-      console.error(error);
-      responseContainer.innerHTML = `<p class="text-danger">Error: Something went wrong.</p>`;
-    }
-  });
- // === MULTI-MODEL CHAT ===
+        const data = await res.json();
+        responseContainer.innerHTML = `
+          <p><strong>You:</strong> ${message}</p>
+          <p><strong>Assistant:</strong> ${data.response}</p>
+        `;
+        userInput.value = '';
+      } catch (error) {
+        console.error(error);
+        responseContainer.innerHTML = `<p class="text-danger">Error: Something went wrong.</p>`;
+      }
+    });
+  }
+
+  // Multi-model chat
   const modelSelect = document.getElementById('model-selector');
   const sendBtn = document.getElementById('send-btn');
   const chatBox = document.getElementById('chat-box');
 
-  if (sendBtn && modelSelect && chatBox) {
+  if (sendBtn && modelSelect && chatBox && userInput) {
     sendBtn.addEventListener('click', async () => {
       const prompt = userInput.value.trim();
       const model = modelSelect.value;
@@ -102,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // === ADMIN BROADCAST TO ALL MODELS ===
+  // Admin broadcast
   const updateBtn = document.getElementById('update-btn');
   if (updateBtn) {
     updateBtn.addEventListener('click', async () => {
@@ -120,14 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (err) {
         alert("Update failed.");
         console.error(err);
-          console.error(err);
-            console.error(err);
-          }
-        });
       }
-    }
-  });
-  document.addEventListener("DOMContentLoaded", () => {
+    });
+  }
+
+  // Model card clicks
   const buttons = document.querySelectorAll(".model-card .btn");
 
   buttons.forEach(button => {
@@ -138,16 +113,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const userMessage = prompt(`Ask something to ${modelName.toUpperCase()} AI:`);
 
       if (userMessage) {
-        const response = await fetch(`/api/chat/${modelName}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ message: userMessage })
-        });
+        try {
+          const response = await fetch(`/api/chat/${modelName}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ message: userMessage })
+          });
 
-        const data = await response.json();
-        alert(`${modelName.toUpperCase()} says: ${data.reply}`);
+          const data = await response.json();
+          alert(`${modelName.toUpperCase()} says: ${data.reply}`);
+        } catch (err) {
+          console.error(err);
+          alert(`${modelName.toUpperCase()} failed to respond.`);
+        }
       }
     });
   });
