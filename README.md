@@ -3,8 +3,7 @@
 Welcome to the **CAPS** project!
 
 ## Overview
-
-Nomatica1 is a project located at `/Users/Eureka/Documents/nomatica1/`.  
+ 
 This README provides basic information and setup instructions.
 
 ## Getting Started
