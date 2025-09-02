@@ -26,42 +26,6 @@
     </div>
   </div>
 
-  <script>
-    // Sidebar toggle
-    document.getElementById("menu-toggle").addEventListener("click", function () {
-      document.getElementById("wrapper").classList.toggle("toggled");
-      localStorage.setItem("sidebar-collapsed", document.getElementById("wrapper").classList.contains("toggled"));
-    });
-
-    // Sidebar state persistence
-    window.addEventListener("DOMContentLoaded", () => {
-      if (localStorage.getItem("sidebar-collapsed") === "true") {
-        document.getElementById("wrapper").classList.add("toggled");
-      }
-    });
-
-    // Chat form submission
-    const chatForm = document.getElementById('chat-form');
-    const userInput = document.getElementById('user-input');
-    const responseDiv = document.getElementById('chat-response');
-
-    chatForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const question = userInput.value;
-      responseDiv.innerHTML = '<em>Thinking...</em>';
-
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: question })
-      });
-
-      const data = await res.json();
-      responseDiv.innerHTML = `<p>${data.reply}</p>`;
-      userInput.value = '';
-    });
-  </script>
-
   <!-- Model selection + Broadcast -->
   <div class="container mt-4">
     <div class="d-flex align-items-center justify-content-center">
