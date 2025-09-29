@@ -1,0 +1,20 @@
+<h2>Chat with Phi-4 AI</h2>
+<form id="phi4Form">
+  <input type="text" name="prompt" placeholder="Ask anything...">
+  <button type="submit">Send</button>
+</form>
+<div id="phi4Response"></div>
+
+<script>
+  document.getElementById("phi4Form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const prompt = e.target.prompt.value;
+    const res = await fetch("/chat/phi4", {
+      method: "POST",
+      body: JSON.stringify({ prompt }),
+      headers: { "Content-Type": "application/json" }
+    });
+    const data = await res.json();
+    document.getElementById("phi4Response").innerText = data.response;
+  });
+</script>

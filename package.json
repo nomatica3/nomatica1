@@ -1,0 +1,48 @@
+{
+  "name": "colorful-moves",
+  "version": "1.0.0",
+  "description": "Multi-model AI Chatbot Platform with dynamic, secure routing and EJS templating",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "echo 'no build step'",
+    "test": "echo \"No tests specified\" && exit 0",
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "express",
+    "ejs",
+    "dynamic",
+    "nodejs"
+  ],
+  "author": "Jeremy J. Johnson",
+  "license": "MIT",
+  "type": "commonjs",
+  "engines": {
+    "node": "22.x"
+  },
+  "dependencies": {
+    "axios": "^1.10.0",
+    "body-parser": "^1.20.3",
+    "bootstrap": "^5.3.7",
+    "colorful-moves": "github:nomatica3/nomatica1",
+    "cors": "2.8.5",
+    "dotenv": "^16.6.1",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-ejs-layouts": "^2.5.1",
+    "http-proxy-middleware": "^3.0.5",
+    "morgan": "^1.10.0",
+    "node-fetch": "^3.3.2",
+    "nodemailer": "^7.0.4",
+    "openai": "^5.8.2",
+    "path": "^0.12.7",
+    "puppeteer": "^24.11.2",
+    "vhost": "^3.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "nodemon": "^3.1.0"
+  }
+}

@@ -1,0 +1,6 @@
+{
+    "name": "openchat",
+    "role": "chatbot",
+    "tasks": [ "message_generation", "contextual_analysis", "user_engagement" ],
+    "permissions": [ "read_messages", "send_messages" ]
+}

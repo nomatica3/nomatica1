@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Search Worker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background: #f9f9f9;
+      color: #333;
+      text-align: center;
+    }
+    button {
+      margin: 1rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    output {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+      color: #0055aa;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="heading">Loading message...</h1>
+  <p>This page is served from the static asset <code>public/index.html</code>.</p>
+
+  <button id="messageButton" type="button">Fetch Message</button>
+  <output id="messageOutput"></output>
+
+  <button id="uuidButton" type="button">Fetch Random UUID</button>
+  <output id="uuidOutput"></output>
+
+  <script>
+    async function fetchMessage() {
+      const resp = await fetch('/message');
+      const text = await resp.text();
+      document.getElementById('messageOutput').textContent = text;
+      document.getElementById('heading').textContent = text;
+    }
+
+    async function fetchUUID() {
+      const resp = await fetch('/random');
+      const text = await resp.text();
+      document.getElementById('uuidOutput').textContent = text;
+    }
+
+    // Fetch the message immediately on load
+    fetchMessage();
+
+    document.getElementById('messageButton').addEventListener('click', fetchMessage);
+    document.getElementById('uuidButton').addEventListener('click', fetchUUID);
+  </script>
+</body>
+</html>
