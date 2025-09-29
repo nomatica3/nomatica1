@@ -1,0 +1,38 @@
+# Normalize line endings across OS
+* text=auto eol=lf
+
+# Ensure EJS, JS, JSON, CSS, HTML handled as text
+*.ejs text
+*.js text
+*.json text
+*.css text
+*.html text
+
+# Treat Markdown as text
+*.md text
+
+# Keep shell scripts executable
+*.sh text eol=lf
+
+# Ignore diffs for large binary files
+*.bin binary
+*.ckpt binary
+*.pt binary
+*.pth binary
+*.onnx binary
+*.h5 binary
+*.tflite binary
+*.safetensors binary
+
+# SQLite and databases
+*.sqlite3 binary
+*.db binary
+*.sqlite binary
+
+# Images
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.svg text
